@@ -2,7 +2,7 @@
 
 ## Scenario
 
-A customer manually uninstalled McAfee/Trellix AV. The expectation was that Microsoft Defender Antivirus would automatically become active again. However, Windows Security shows no active protection, and `Get-MpComputerStatus` reports Defender as not running.
+When trying to uninstall a 3rd Party AV like here McAfee/Trellix AV. The expectation was that Microsoft Defender Antivirus would automatically become active again. However, Windows Security shows no active protection, and `Get-MpComputerStatus` reports Defender as not running.
 
 Typical symptoms:
 
