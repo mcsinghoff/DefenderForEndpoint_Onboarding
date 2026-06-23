@@ -2,7 +2,7 @@
 
 ### Ziel
 
-Die Teilnehmer sollen nachvollziehen können, wo das Onboarding zu Microsoft Defender for Endpoint für Windows-11-Clients konfiguriert ist.
+Wir möchten nachvollziehen können, wo das Onboarding zu Microsoft Defender for Endpoint für Windows-11-Clients konfiguriert ist.
 
 ### Schritte
 

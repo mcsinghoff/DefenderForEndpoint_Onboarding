@@ -1,4 +1,4 @@
-## Übung 10: Intune Sync auslösen und zeitliche Verzögerung verstehen
+## Übung 8: Intune Sync auslösen und zeitliche Verzögerung verstehen
 
 ### Ziel
 

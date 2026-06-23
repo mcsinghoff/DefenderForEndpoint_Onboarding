@@ -2,7 +2,7 @@
 
 ### Ziel
 
-Die Teilnehmer sollen nachvollziehen können, ob eine Intune-Policy auf einem Gerät angekommen ist.
+Wir möchten nachvollziehen können, ob eine Intune-Policy auf einem Gerät angekommen ist.
 
 ### Schritte
 
