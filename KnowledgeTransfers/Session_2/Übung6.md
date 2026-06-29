@@ -9,7 +9,7 @@ Nach der MDE-Migration sind Response Actions wie `Run antivirus scan`, `Collect 
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen typische Response Actions kennen, deren Auswirkungen einschätzen und entscheiden, welche Maßnahme in welchem Szenario angemessen ist.
+Wir möchten typische Response Actions kennen, deren Auswirkungen einschätzen und entscheiden, welche Maßnahme in welchem Szenario angemessen ist.
 
 ## Benötigte Berechtigungen
 

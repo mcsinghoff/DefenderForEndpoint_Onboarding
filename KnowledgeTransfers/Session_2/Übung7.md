@@ -5,11 +5,10 @@
 
 Nach der Umstellung auf ASR Audit oder Block meldet ein Fachbereich, dass eine Anwendung oder ein Makro nicht mehr wie gewohnt funktioniert. Im Defender Portal ist ein ASR-Ereignis sichtbar. Der Fachbereich fordert eine schnelle Ausnahme für den kompletten Programmordner.
 
-Diese Situation ist im Betrieb nach einer MDE-Migration sehr realistisch. Die Herausforderung besteht darin, legitime Geschäftsprozesse wiederherzustellen, ohne durch zu breite Ausnahmen die Schutzwirkung von ASR oder Defender Antivirus erheblich zu schwächen.
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen lernen, wie man einen möglichen False Positive bewertet, welche Informationen benötigt werden und wann eine ASR-Ausnahme vertretbar ist.
+Wir wollen lernen, wie man einen möglichen False Positive bewertet, welche Informationen benötigt werden und wann eine ASR-Ausnahme vertretbar ist.
 
 ## Benötigte Berechtigungen
 
@@ -66,12 +65,11 @@ Dokumentiere:
 
 Prüfe:
 
-| Prüfpunk | Bewertung |
+| Prüfpunkt | Bewertung |
 |---|---|
 | Ist die Datei signiert? |  |
 | Liegt die Datei in einem vertrauenswürdigen Installationspfad? |  |
 | Wird die Datei aus `%TEMP%`, `%APPDATA%` oder Downloads gestartet? |  |
-| Ist die Command Line plausibel? |  |
 | Gibt es Netzwerkverbindungen zu unbekannten Zielen? |  |
 | Gibt es ähnliche Treffer auf mehreren Geräten? |  |
 | Gibt es weitere Alerts auf dem Gerät? |  |
@@ -92,7 +90,6 @@ Prüfe:
 |---|---|
 | Einzelne signierte EXE | Vergleichsweise eng |
 | Konkreter Anwendungspfad | Mittel, abhängig von Schreibrechten |
-| Benutzerbeschreibbarer Pfad | Hoch |
 | Komplettes Laufwerk | Sehr hoch, nicht empfehlenswert |
 | `C:\Windows` oder `C:\Users` breit | Sehr hoch, vermeiden |
 
@@ -140,7 +137,7 @@ DeviceEvents
 
 ## Erwartetes Ergebnis
 
-Die Teilnehmer sollen unterscheiden können:
+Zu unterscheiden ist:
 
 | Ergebnis | Bedeutung |
 |---|---|
@@ -149,7 +146,7 @@ Die Teilnehmer sollen unterscheiden können:
 | Ausnahme erforderlich | Ausnahme wird eng, dokumentiert und genehmigt umgesetzt |
 | Regel noch nicht blockreif | Audit verlängern und weitere Daten sammeln |
 
-## Bewertung im Betriebsalltag
+## Bewertungskriterien Beispiele
 
 | Beobachtung | Nächste Aktion |
 |---|---|
@@ -161,11 +158,10 @@ Die Teilnehmer sollen unterscheiden können:
 
 ## Diskussionsfragen
 
-- Warum sind breite Ausnahmen gefährlich?
 - Wer darf eine Ausnahme genehmigen?
 - Wie lange soll eine Ausnahme gültig sein?
 - Wie wird eine Ausnahme regelmäßig überprüft?
-- Welche Informationen braucht Security, bevor eine Ausnahme akzeptiert wird?
+- Welche Informationen braucht das Security-Team, bevor eine Ausnahme akzeptiert wird?
 
 ## Merksatz
 

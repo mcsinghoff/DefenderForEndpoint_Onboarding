@@ -11,7 +11,6 @@ winword.exe -> powershell.exe -> rundll32.exe
 
 Der betroffene Benutzer arbeitet in einer Fachabteilung und behauptet, nur ein normales Dokument geöffnet zu haben. Die IT muss entscheiden, ob es sich um eine legitime Automatisierung, ein False Positive oder einen möglichen Angriff handelt.
 
-Diese Bewertung wird nach einer MDE-Migration zum Betriebsalltag, weil Microsoft Defender for Endpoint nicht nur Dateien meldet, sondern Prozessketten und Verhalten sichtbar macht.
 
 ## Ziel der Übung
 
@@ -58,7 +57,7 @@ Bewerte eine vorgegebene oder reale Prozesskette anhand folgender Fragen:
 
 1. Öffne das Microsoft Defender Portal.
 2. Öffne den relevanten Alert oder das betroffene Gerät.
-3. Wechsle zur Alert Story oder Device Timeline.
+3. Wechsle zur Alert Story oder Device Timeline. (Filtere auf die letzten 30 Tage)
 4. Suche die Prozessinformationen.
 
 ### 2. Parent- und Child-Prozess identifizieren
@@ -119,10 +118,10 @@ Nicht jede auffällige Prozesskette ist automatisch bösartig. Prüfe:
 |---|---|
 | Legitim | Bekannte Anwendung, erwartetes Verhalten, App-Owner bestätigt |
 | Verdächtig | Ungewöhnliche Kette, aber noch nicht eindeutig |
-| Wahrscheinlich bösartig | Typisches Angriffsmuster, unbekannte Datei, auffällige Command Line |
+| (Sehr) Wahrscheinlich bösartig | Typisches Angriffsmuster, unbekannte Datei, auffällige Command Line |
 | Weitere Prüfung nötig | Kontext fehlt oder widersprüchliche Hinweise |
 
-## Optionale Advanced-Hunting-Abfragen
+## Optionale Advanced-Hunting-Abfragen (Können unter "Hunting" abgefragt werden)
 
 Office-Prozesse, die Shells oder Skriptinterpreter starten:
 
@@ -144,17 +143,6 @@ DeviceProcessEvents
 | where ProcessCommandLine has_any ("EncodedCommand", "DownloadString", "Invoke-WebRequest", "IEX", "FromBase64String")
 | project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName
 | order by Timestamp desc
-```
-
-## Erwartetes Ergebnis
-
-Die Teilnehmer sollen eine kurze Bewertung schreiben können:
-
-```text
-Auf Gerät <Name> wurde durch <Parent Process> der Prozess <Child Process> gestartet.
-Die Command Line enthält <auffällige/nicht auffällige Merkmale>.
-Im Unternehmenskontext ist das Verhalten <legitim/verdächtig/unklar>.
-Empfohlene nächste Aktion: <Aktion>.
 ```
 
 ## Bewertung im Betriebsalltag
