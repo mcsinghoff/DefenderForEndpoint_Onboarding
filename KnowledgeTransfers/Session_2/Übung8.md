@@ -9,7 +9,7 @@ Im Betriebsalltag nach der MDE-Migration wird Advanced Hunting hilfreich, wenn m
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen eine einfache KQL-Abfrage in Advanced Hunting ausführen, ASR-Ereignisse finden und die Ergebnisse nach Gerät, Regel oder Prozess zusammenfassen.
+Wir möchten eine einfache KQL-Abfrage in Advanced Hunting ausführen, ASR-Ereignisse finden und die Ergebnisse nach Gerät, Regel oder Prozess zusammenfassen.
 
 ## Benötigte Berechtigungen
 
