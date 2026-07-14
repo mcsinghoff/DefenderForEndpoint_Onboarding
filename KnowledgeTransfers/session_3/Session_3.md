@@ -175,18 +175,6 @@ Eine Microsoft-Signatur oder ein normaler Dateiname beweist nicht, dass eine Akt
 
 ## 4. Device (Gerät) Investigation (Untersuchung) und Timeline (Zeitachse)
 
-Die Device Page (Geräteseite) liefert den Endpunktkontext zu einem Incident.
-
-Wichtige Bereiche:
-
-- Overview (Übersicht),
-- Alerts (Warnungen),
-- Timeline (Zeitachse),
-- Security recommendations (Sicherheitsempfehlungen),
-- Software inventory (Softwarebestand),
-- Logged-on users (angemeldete Benutzer),
-- Response actions (Antwortaktionen),
-- Action Center (Aktionscenter) beziehungsweise Action History (Aktionsverlauf).
 
 ### Typische Timeline (Zeitachse)-Fragen
 
@@ -415,15 +403,6 @@ Mögliche Aufgaben:
 - Business Impact (betriebliche Auswirkung) durch Stoppen von Prozessen oder Löschen von Dateien,
 - Missbrauch bei zu weit gefassten Rollen,
 - Übertragung sensibler Dateien.
-
-### Governance
-
-- separate Rollen für Basic und Advanced Live Response (Erweiterte Liveantwort),
-- nur freigegebene Test- oder Incident-Geräte,
-- Ticketreferenz und Zweck dokumentieren,
-- Command Log (Befehlsprotokoll) sichern,
-- keine unbekannten Skripte oder Binaries hochladen,
-- Vier-Augen-Prinzip für eingreifende Maßnahmen erwägen.
 
 ---
 
