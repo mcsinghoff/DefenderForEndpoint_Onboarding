@@ -1,0 +1,224 @@
+# Session 3 - Übung 8
+## MSSP-/Sentinel-Eskalation und Incident-Abschluss
+
+## Praxissituation
+
+Das MSSP meldet einen Incident mit MDE-Prozessdaten. Zusätzlich existieren Hinweise aus einer Firewall und aus Entra-Anmeldedaten. Microsoft Sentinel ist beim Kunden noch nicht vollständig eingeführt, soll diese Datenquellen aber zukünftig in der einheitlichen Defender-Oberfläche zusammenführen.
+
+Die interne IT muss heute schon festlegen, welche Informationen sie an das MSSP liefert, wer Response Actions freigibt und wann ein Incident geschlossen werden darf.
+
+## Ziel der Übung
+
+Die Teilnehmer sollen einen technischen Incident in einen vollständigen Betriebs- und Eskalationsprozess überführen und die spätere Rolle von Microsoft Sentinel einordnen.
+
+## Benötigte Berechtigungen
+
+- Leserechte auf Incident, Alerts und Geräte
+- Zugriff auf das interne Ticketsystem oder eine Schulungsvorlage
+- Keine produktiven Sentinel- oder Response-Konfigurationen erforderlich
+
+## Aufgabe
+
+Bearbeite ein Beispiel mit folgenden Informationen:
+
+```text
+- MDE Alert: verdächtige PowerShell-Ausführung
+- Gerät: Windows-11-Client eines Administrators
+- Netzwerkhinweis: Verbindung zu unbekannter IP-Adresse
+- Benutzerhinweis: ungewöhnliche Anmeldung kurz vor dem Alert
+- MSSP-Empfehlung: Gerät isolieren und Zugangsdaten zurücksetzen
+```
+
+Erstelle:
+
+- Eskalationsentscheidung,
+- Rollen- und Verantwortlichkeitsmatrix,
+- Kommunikationsvorlage,
+- Abschlusskriterien,
+- Liste der später in Sentinel benötigten Datenquellen.
+
+## Schritt-für-Schritt-Anleitung
+
+### 1. Technische Fakten sammeln
+
+| Feld | Wert |
+|---|---|
+| Incident ID |  |
+| Incident Title |  |
+| Severity/Priority |  |
+| Betroffenes Gerät |  |
+| Betroffener Benutzer |  |
+| Prozesskette |  |
+| Remote IP/URL |  |
+| Weitere Geräte |  |
+| Bereits erfolgte Aktionen |  |
+| Pending Actions |  |
+
+### 2. Business-Kontext ergänzen
+
+| Frage | Antwort |
+|---|---|
+| Ist der Benutzer privilegiert? |  |
+| Ist das Gerät geschäftskritisch? |  |
+| Welche Anwendungen und Daten sind betroffen? |  |
+| Ist ein Ersatzgerät verfügbar? |  |
+| Welcher Fachbereich muss informiert werden? |  |
+| Bestehen Melde- oder Datenschutzpflichten? |  |
+
+### 3. Verantwortlichkeiten festlegen
+
+| Tätigkeit | MSSP/SOC | Interne IT | Fachbereich/Management |
+|---|---|---|---|
+| 24/7 Monitoring | R | I | I |
+| Ersttriage | R | C | I |
+| Lokalen Benutzerkontext liefern | C | R | C |
+| Isolation empfehlen | R | C | I |
+| Isolation freigeben | C | R/A je nach Prozess | C/I |
+| Kennwort-/Token-Reset | C | R | I |
+| Geräte-Rebuild | C | R | I |
+| Datenschutzbewertung | C | C | R/A |
+| Incident-Abschluss | C | R/A | I |
+
+Legende:
+
+- `R` = Responsible
+- `A` = Accountable
+- `C` = Consulted
+- `I` = Informed
+
+### 4. Eskalationsstufen definieren
+
+| Stufe | Beispiel | Reaktion |
+|---|---|---|
+| 1 | Einzelner Low/Medium Alert ohne Folgeaktivität | Interne Triage, normale Bearbeitung |
+| 2 | Wahrscheinliche Kompromittierung eines Clients | MSSP/Security einbinden, Response Action prüfen |
+| 3 | Privilegiertes Konto, Credential Theft oder mehrere Geräte | Sofortige Eskalation, Isolation und Identity Response |
+| 4 | Datenabfluss, Ransomware oder kritische Infrastruktur | Krisen-/Major-Incident-Prozess, Management und weitere Stellen |
+
+### 5. MSSP-Übergabe formulieren
+
+Beispiel:
+
+```text
+Incident: <ID und Titel>
+Priorität: <Wert>
+Betroffene Assets: <Gerät und Benutzer>
+Business-Kontext: <Rolle/Kritikalität>
+Technische Beobachtung: <Prozesskette, Hash, IP/URL>
+Bereits durchgeführt: <Aktionen>
+Aktueller Status: <isoliert/nicht isoliert, online/offline>
+Offene Entscheidung: <z. B. Isolation, Live Response, Kennwortreset>
+Freigaben: <Name/Rolle/Ticket>
+Gewünschte Unterstützung: <konkrete Frage an MSSP>
+```
+
+### 6. Sentinel-Zielbild einordnen
+
+| Datenquelle | Nutzen im Incident |
+|---|---|
+| Defender XDR | Endpoint-, Identity-, E-Mail- und Cloud-App-Signale |
+| Entra Sign-in Logs | Anmeldeorte, Risiko, MFA und Token-Kontext |
+| Firewall/Proxy | Externe Verbindungen und blockierte Ziele |
+| Azure Activity | Administrative Cloud-Aktionen |
+| Windows Security Events | Zusätzliche Server-/Domain-Controller-Ereignisse |
+| Third-Party Logs | Nicht-Microsoft-Sicherheitsprodukte und Anwendungen |
+
+Sentinel soll den Prozess nicht duplizieren, sondern zusätzliche Daten und Korrelationen in die einheitliche Investigation einbringen.
+
+### 7. Abschlusskriterien prüfen
+
+| Kriterium | Erfüllt? | Nachweis |
+|---|---|---|
+| Angriffsscope vollständig bewertet |  |  |
+| Gerät isoliert oder Risiko anderweitig kontrolliert |  |  |
+| Schädliche Artefakte entfernt |  |  |
+| Zugangsdaten/Tokens geprüft oder zurückgesetzt |  |  |
+| Weitere Geräte geprüft |  |  |
+| AIR/Action Center kontrolliert |  |  |
+| Business Owner informiert |  |  |
+| Classification und Determination gesetzt |  |  |
+| Root Cause dokumentiert |  |  |
+| Folgeaufgaben erstellt |  |  |
+
+### 8. Abschlusskommentar erstellen
+
+```text
+Incident als <Classification> / <Determination> bewertet.
+Betroffen waren <Assets>.
+Root Cause: <Ursache>.
+Durchgeführte Maßnahmen: <Liste>.
+Scope-Prüfung: <Ergebnis>.
+Validierung: <Nachweis>.
+Restrisiko: <Bewertung>.
+Folgeaufgaben: <Tickets/Changes>.
+Freigabe zum Abschluss durch <Rolle/Name> am <Datum>.
+```
+
+## KQL-Ergänzung
+
+Defender-Alerts eines Benutzers und Geräts suchen:
+
+```kql
+let TargetDevice = "DEVICE-NAME-HERE";
+let TargetUser = "user@contoso.com";
+AlertEvidence
+| where Timestamp > ago(30d)
+| where DeviceName =~ TargetDevice or AccountUpn =~ TargetUser
+| join kind=leftouter (
+    AlertInfo
+    | where Timestamp > ago(30d)
+    | project AlertId, AlertTitle=Title, Severity,
+              ServiceSource, DetectionSource, AlertTime=Timestamp
+) on AlertId
+| project AlertTime, AlertTitle, Severity, ServiceSource,
+          DeviceName, AccountUpn, FileName, SHA256,
+          RemoteIP, RemoteUrl, ProcessCommandLine
+| order by AlertTime desc
+```
+
+Hinweis für die spätere Sentinel-Einführung:
+
+- Defender-XDR-Tabellen und Sentinel-Daten können im einheitlichen Defender Portal gemeinsam für Advanced Hunting verfügbar sein.
+- Welche Tabellen vorhanden sind, hängt von angebundenen Datenquellen, Berechtigungen und der Workspace-Konfiguration ab.
+
+## PowerShell-Ergänzung
+
+Lokalen MDE- und AV-Status als Betriebsnachweis erfassen:
+
+```powershell
+Get-MpComputerStatus | Select-Object `
+    AMRunningMode,
+    AntivirusEnabled,
+    RealTimeProtectionEnabled,
+    AMServiceEnabled,
+    IsTamperProtected,
+    AntivirusSignatureLastUpdated
+
+Get-Service -Name Sense, WinDefend -ErrorAction SilentlyContinue |
+    Select-Object Name, Status, StartType
+```
+
+> Produktive Änderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.
+
+## Erwartetes Ergebnis
+
+Die Teilnehmer liefern eine vollständige Incident-Übergabe mit:
+
+- technischem Scope,
+- Business-Kontext,
+- klarer Rollenverteilung,
+- konkreter Eskalationsfrage,
+- dokumentierten Response Actions,
+- Abschlusskriterien und Folgeaufgaben.
+
+## Diskussionsfragen
+
+- Welche Entscheidungen darf das MSSP ohne Rückfrage treffen?
+- Wie schnell muss die interne IT außerhalb der Geschäftszeit reagieren?
+- Welche Datenquellen haben für die Sentinel-Einführung höchste Priorität?
+- Wo wird der führende Bearbeitungsstatus gepflegt: Defender Incident oder ITSM-Ticket?
+- Wie verhindert man doppelte oder widersprüchliche Dokumentation?
+
+## Merksatz
+
+Ein Incident ist erst dann betrieblich beherrscht, wenn technische Analyse, Business-Kontext, Verantwortlichkeiten, Maßnahmen und Abschlussnachweise zusammengeführt wurden.
