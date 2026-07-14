@@ -5,7 +5,7 @@
 
 Das MSSP meldet einen Incident mit MDE-Prozessdaten. Zusätzlich existieren Hinweise aus einer Firewall und aus Entra-Anmeldedaten. Microsoft Sentinel ist beim Kunden noch nicht vollständig eingeführt, soll diese Datenquellen aber zukünftig in der einheitlichen Defender-Oberfläche zusammenführen.
 
-Die interne IT muss heute schon festlegen, welche Informationen sie an das MSSP liefert, wer Response Actions freigibt und wann ein Incident geschlossen werden darf.
+Die interne IT muss heute schon festlegen, welche Informationen sie an das MSSP liefert, wer Response Actions (Antwortaktionen) freigibt und wann ein Incident geschlossen werden darf.
 
 ## Ziel der Übung
 
@@ -13,7 +13,7 @@ Die Teilnehmer sollen einen technischen Incident in einen vollständigen Betrieb
 
 ## Benötigte Berechtigungen
 
-- Leserechte auf Incident, Alerts und Geräte
+- Leserechte auf Incident, Alerts (Warnungen) und Geräte
 - Zugriff auf das interne Ticketsystem oder eine Schulungsvorlage
 - Keine produktiven Sentinel- oder Response-Konfigurationen erforderlich
 
@@ -22,10 +22,10 @@ Die Teilnehmer sollen einen technischen Incident in einen vollständigen Betrieb
 Bearbeite ein Beispiel mit folgenden Informationen:
 
 ```text
-- MDE Alert: verdächtige PowerShell-Ausführung
+- MDE Alert (Warnung): verdächtige PowerShell-Ausführung
 - Gerät: Windows-11-Client eines Administrators
 - Netzwerkhinweis: Verbindung zu unbekannter IP-Adresse
-- Benutzerhinweis: ungewöhnliche Anmeldung kurz vor dem Alert
+- Benutzerhinweis: ungewöhnliche Anmeldung kurz vor dem Alert (Warnung)
 - MSSP-Empfehlung: Gerät isolieren und Zugangsdaten zurücksetzen
 ```
 
@@ -43,16 +43,16 @@ Erstelle:
 
 | Feld | Wert |
 |---|---|
-| Incident ID |  |
-| Incident Title |  |
-| Severity/Priority |  |
+| Incident ID (Incident-ID) |  |
+| Incident Title (Incidenttitel) |  |
+| Severity (Schweregrad)/Priority (Priorität) |  |
 | Betroffenes Gerät |  |
 | Betroffener Benutzer |  |
 | Prozesskette |  |
 | Remote IP/URL |  |
 | Weitere Geräte |  |
 | Bereits erfolgte Aktionen |  |
-| Pending Actions |  |
+| Pending Actions (ausstehende Aktionen) |  |
 
 ### 2. Business-Kontext ergänzen
 
@@ -90,8 +90,8 @@ Legende:
 
 | Stufe | Beispiel | Reaktion |
 |---|---|---|
-| 1 | Einzelner Low/Medium Alert ohne Folgeaktivität | Interne Triage, normale Bearbeitung |
-| 2 | Wahrscheinliche Kompromittierung eines Clients | MSSP/Security einbinden, Response Action prüfen |
+| 1 | Einzelner Low (Niedrig)/Medium (Mittel) Alert (Warnung) ohne Folgeaktivität | Interne Triage, normale Bearbeitung |
+| 2 | Wahrscheinliche Kompromittierung eines Clients | MSSP/Security einbinden, Response Action (Antwortaktion) prüfen |
 | 3 | Privilegiertes Konto, Credential Theft oder mehrere Geräte | Sofortige Eskalation, Isolation und Identity Response |
 | 4 | Datenabfluss, Ransomware oder kritische Infrastruktur | Krisen-/Major-Incident-Prozess, Management und weitere Stellen |
 
@@ -102,12 +102,12 @@ Beispiel:
 ```text
 Incident: <ID und Titel>
 Priorität: <Wert>
-Betroffene Assets: <Gerät und Benutzer>
+Betroffene Assets (Bestand): <Gerät und Benutzer>
 Business-Kontext: <Rolle/Kritikalität>
 Technische Beobachtung: <Prozesskette, Hash, IP/URL>
 Bereits durchgeführt: <Aktionen>
 Aktueller Status: <isoliert/nicht isoliert, online/offline>
-Offene Entscheidung: <z. B. Isolation, Live Response, Kennwortreset>
+Offene Entscheidung: <z. B. Isolation, Live Response (Liveantwort), Kennwortreset>
 Freigaben: <Name/Rolle/Ticket>
 Gewünschte Unterstützung: <konkrete Frage an MSSP>
 ```
@@ -123,7 +123,7 @@ Gewünschte Unterstützung: <konkrete Frage an MSSP>
 | Windows Security Events | Zusätzliche Server-/Domain-Controller-Ereignisse |
 | Third-Party Logs | Nicht-Microsoft-Sicherheitsprodukte und Anwendungen |
 
-Sentinel soll den Prozess nicht duplizieren, sondern zusätzliche Daten und Korrelationen in die einheitliche Investigation einbringen.
+Sentinel soll den Prozess nicht duplizieren, sondern zusätzliche Daten und Korrelationen in die einheitliche Investigation (Untersuchung) einbringen.
 
 ### 7. Abschlusskriterien prüfen
 
@@ -134,18 +134,18 @@ Sentinel soll den Prozess nicht duplizieren, sondern zusätzliche Daten und Korr
 | Schädliche Artefakte entfernt |  |  |
 | Zugangsdaten/Tokens geprüft oder zurückgesetzt |  |  |
 | Weitere Geräte geprüft |  |  |
-| AIR/Action Center kontrolliert |  |  |
+| AIR/Action Center (Aktionscenter) kontrolliert |  |  |
 | Business Owner informiert |  |  |
-| Classification und Determination gesetzt |  |  |
-| Root Cause dokumentiert |  |  |
+| Classification (Klassifizierung) und Determination (Bestimmung) gesetzt |  |  |
+| Root Cause (Grundursache) dokumentiert |  |  |
 | Folgeaufgaben erstellt |  |  |
 
 ### 8. Abschlusskommentar erstellen
 
 ```text
-Incident als <Classification> / <Determination> bewertet.
-Betroffen waren <Assets>.
-Root Cause: <Ursache>.
+Incident als <Classification (Klassifizierung)> / <Determination (Bestimmung)> bewertet.
+Betroffen waren <Assets (Bestand)>.
+Root Cause (Grundursache): <Ursache>.
 Durchgeführte Maßnahmen: <Liste>.
 Scope-Prüfung: <Ergebnis>.
 Validierung: <Nachweis>.
@@ -156,7 +156,7 @@ Freigabe zum Abschluss durch <Rolle/Name> am <Datum>.
 
 ## KQL-Ergänzung
 
-Defender-Alerts eines Benutzers und Geräts suchen:
+Defender-Alerts (Warnungen) eines Benutzers und Geräts suchen:
 
 ```kql
 let TargetDevice = "DEVICE-NAME-HERE";
@@ -178,7 +178,7 @@ AlertEvidence
 
 Hinweis für die spätere Sentinel-Einführung:
 
-- Defender-XDR-Tabellen und Sentinel-Daten können im einheitlichen Defender Portal gemeinsam für Advanced Hunting verfügbar sein.
+- Defender-XDR-Tabellen und Sentinel-Daten können im einheitlichen Defender Portal gemeinsam für Advanced Hunting (Erweiterte Suche) verfügbar sein.
 - Welche Tabellen vorhanden sind, hängt von angebundenen Datenquellen, Berechtigungen und der Workspace-Konfiguration ab.
 
 ## PowerShell-Ergänzung
@@ -208,7 +208,7 @@ Die Teilnehmer liefern eine vollständige Incident-Übergabe mit:
 - Business-Kontext,
 - klarer Rollenverteilung,
 - konkreter Eskalationsfrage,
-- dokumentierten Response Actions,
+- dokumentierten Response Actions (Antwortaktionen),
 - Abschlusskriterien und Folgeaufgaben.
 
 ## Diskussionsfragen

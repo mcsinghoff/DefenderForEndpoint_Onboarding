@@ -3,6 +3,12 @@
 
 Dieser Ordner enthält die Schulungsunterlagen und acht praxisnahe Übungen für Session 3 des Microsoft-Defender-for-Endpoint-Migrationsprojekts.
 
+## Hinweis zu den Portalbezeichnungen
+
+Die Unterlagen nennen englische Bezeichnungen der Microsoft-Portale im Format `English label (deutsche Bezeichnung)`, zum Beispiel `Advanced hunting (Erweiterte Suche)`. Dadurch können die Übungen unabhängig davon verwendet werden, ob Screenshots, Microsoft-Dokumentation oder die deutsche Portaloberfläche genutzt werden. Microsoft kann Menübezeichnungen durch Portalupdates geringfügig ändern.
+
+---
+
 ## Kundenkontext
 
 - ca. 1.500 Windows-11-Clients
@@ -19,13 +25,13 @@ Dieser Ordner enthält die Schulungsunterlagen und acht praxisnahe Übungen für
 | Datei | Inhalt |
 |---|---|
 | `Session_3.md` | Erklärungsteil, Lernziele, Betriebsmodell, Tabellen, Zusammenfassung und Vokabelliste |
-| `Session_3_Uebung_01_Incident_Triage_und_Priorisierung.md` | Incident Queue, Priorisierung, Status, Assignment und Alert Lifecycle |
-| `Session_3_Uebung_02_Incident_Investigation_Evidence_Entities_Timeline.md` | Incident Story, Alerts, Evidence, Entities, Device Page und Timeline |
+| `Session_3_Uebung_01_Incident_Triage_und_Priorisierung.md` | Incident Queue (Incidentwarteschlange), Priorisierung, Status, Assignment (Zuweisung) und Alert Lifecycle (Warnungslebenszyklus) |
+| `Session_3_Uebung_02_Incident_Investigation_Evidence_Entities_Timeline.md` | Incident Story (Incidentverlauf), Alerts (Warnungen), Evidence (Beweise), Entities (Entitäten), Device Page (Geräteseite) und Timeline (Zeitachse) |
 | `Session_3_Uebung_03_Advanced_Hunting_und_KQL.md` | KQL-Grundlagen und Suche nach ähnlichen Aktivitäten auf weiteren Geräten |
-| `Session_3_Uebung_04_AIR_und_Action_Center.md` | Automated Investigation & Response, Verdicts, Pending Actions und History |
-| `Session_3_Uebung_05_Response_Actions_und_Device_Isolation.md` | Auswahl geeigneter Response Actions und kontrollierte Geräteisolation |
-| `Session_3_Uebung_06_Live_Response_auf_Testgeraet.md` | Sichere Live-Response-Untersuchung auf einem freigegebenen Testgerät |
-| `Session_3_Uebung_07_Custom_Detection_Rule.md` | Aus einer Hunting Query eine Custom Detection Rule entwerfen |
+| `Session_3_Uebung_04_AIR_und_Action_Center.md` | Automated Investigation & Response (Automatisierte Untersuchung und Reaktion), Verdicts (Bewertungen), Pending Actions (ausstehende Aktionen) und History (Verlauf) |
+| `Session_3_Uebung_05_Response_Actions_und_Device_Isolation.md` | Auswahl geeigneter Response Actions (Antwortaktionen) und kontrollierte Geräteisolation |
+| `Session_3_Uebung_06_Live_Response_auf_Testgeraet.md` | Sichere Live-Response (Liveantwort)-Untersuchung auf einem freigegebenen Testgerät |
+| `Session_3_Uebung_07_Custom_Detection_Rule.md` | Aus einer Hunting Query (Suchabfrage) eine Custom Detection Rule (benutzerdefinierte Erkennungsregel) entwerfen |
 | `Session_3_Uebung_08_MSSP_Sentinel_Eskalation_und_Abschluss.md` | Zusammenarbeit, Sentinel-Übergang, Eskalation, Dokumentation und Incident-Abschluss |
 
 ## Empfohlene Reihenfolge
@@ -37,20 +43,20 @@ Dieser Ordner enthält die Schulungsunterlagen und acht praxisnahe Übungen für
 
 ## Sicherheitshinweise
 
-- Keine produktiven Response Actions ohne Freigabe ausführen.
-- Geräteisolation, App-Restriktion, Datei-Quarantäne und Live Response können den Benutzer oder den Geschäftsbetrieb beeinflussen.
-- Live Response nur auf einem ausdrücklich freigegebenen Testgerät oder im Rahmen eines bestätigten Incident-Response-Prozesses verwenden.
+- Keine produktiven Response Actions (Antwortaktionen) ohne Freigabe ausführen.
+- Geräteisolation, App-Restriktion, Datei-Quarantäne und Live Response (Liveantwort) können den Benutzer oder den Geschäftsbetrieb beeinflussen.
+- Live Response (Liveantwort) nur auf einem ausdrücklich freigegebenen Testgerät oder im Rahmen eines bestätigten Incident-Response-Prozesses verwenden.
 - Produktive Konfigurationsänderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.
 - Alle Entscheidungen, Freigaben und Maßnahmen in einem Ticket oder Incident-Kommentar dokumentieren.
 
 ## Microsoft-Referenzen
 
-- Incidents und Alerts: https://learn.microsoft.com/defender-xdr/incidents-overview
+- Incidents und Alerts (Warnungen): https://learn.microsoft.com/defender-xdr/incidents-overview
 - Incident Management: https://learn.microsoft.com/defender-xdr/manage-incidents
-- Incident Investigation: https://learn.microsoft.com/defender-xdr/investigate-incidents
-- Advanced Hunting: https://learn.microsoft.com/defender-xdr/advanced-hunting-overview
-- Automated Investigations: https://learn.microsoft.com/defender-endpoint/automated-investigations
-- Response Actions: https://learn.microsoft.com/defender-endpoint/respond-machine-alerts
-- Live Response: https://learn.microsoft.com/defender-endpoint/live-response
-- Custom Detections: https://learn.microsoft.com/defender-xdr/custom-detection-rules
+- Incident Investigation (Untersuchung): https://learn.microsoft.com/defender-xdr/investigate-incidents
+- Advanced Hunting (Erweiterte Suche): https://learn.microsoft.com/defender-xdr/advanced-hunting-overview
+- Automated Investigations (Untersuchungen): https://learn.microsoft.com/defender-endpoint/automated-investigations
+- Response Actions (Antwortaktionen): https://learn.microsoft.com/defender-endpoint/respond-machine-alerts
+- Live Response (Liveantwort): https://learn.microsoft.com/defender-endpoint/live-response
+- Custom Detections (benutzerdefinierte Erkennungen): https://learn.microsoft.com/defender-xdr/custom-detection-rules
 - Microsoft Sentinel im Defender Portal: https://learn.microsoft.com/azure/sentinel/microsoft-sentinel-defender-portal

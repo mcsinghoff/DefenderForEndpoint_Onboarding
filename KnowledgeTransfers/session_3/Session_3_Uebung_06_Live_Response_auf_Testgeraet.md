@@ -1,41 +1,41 @@
 # Session 3 - Übung 6
-## Live Response auf einem freigegebenen Testgerät
+## Live Response (Liveantwort) auf einem freigegebenen Testgerät
 
 ## Praxissituation
 
-Das MSSP benötigt Echtzeitinformationen von einem verdächtigen Gerät. Ein Investigation Package reicht nicht aus, weil geprüft werden soll, welche Prozesse und Netzwerkverbindungen aktuell bestehen. Für die Schulung steht ein ungefährliches, ausdrücklich freigegebenes Testgerät bereit.
+Das MSSP benötigt Echtzeitinformationen von einem verdächtigen Gerät. Ein Investigation Package (Untersuchungspaket) reicht nicht aus, weil geprüft werden soll, welche Prozesse und Netzwerkverbindungen aktuell bestehen. Für die Schulung steht ein ungefährliches, ausdrücklich freigegebenes Testgerät bereit.
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen eine Live-Response-Session sicher starten, ausschließlich lesende Untersuchungsbefehle verwenden, das Command Log prüfen und die Session kontrolliert beenden.
+Die Teilnehmer sollen eine Live-Response (Liveantwort)-Session sicher starten, ausschließlich lesende Untersuchungsbefehle verwenden, das Command Log (Befehlsprotokoll) prüfen und die Session kontrolliert beenden.
 
 ## Benötigte Berechtigungen
 
 - Microsoft Defender for Endpoint Plan 2
-- Live-Response-Berechtigung für die betreffende Device Group
-- Aktivierte Live-Response-Funktion im Defender Portal
+- Live-Response (Liveantwort)-Berechtigung für die betreffende Device Group (Gerätegruppe)
+- Aktivierte Live-Response (Liveantwort)-Funktion im Defender Portal
 - Onboarded und erreichbares Windows-11-Testgerät
 - Ausdrückliche Freigabe für die Übung
 
 ## Wichtige Sicherheitsregeln
 
 - Nur auf dem benannten Testgerät arbeiten.
-- Keine Dateien löschen, Prozesse stoppen oder Remediation ausführen.
+- Keine Dateien löschen, Prozesse stoppen oder Remediation (Behebung) ausführen.
 - Keine unbekannten Skripte oder Binaries hochladen.
 - Keine sensitiven Dateien herunterladen.
 - Jede Session mit Ticket- oder Übungsreferenz dokumentieren.
-- Command Log nach der Übung sichern oder dokumentieren.
+- Command Log (Befehlsprotokoll) nach der Übung sichern oder dokumentieren.
 
 ## Ausgangspunkt
 
 ```text
-Assets -> Devices -> <freigegebenes Testgerät>
--> Initiate live response session
+Assets (Bestand) -> Devices (Geräte) -> <freigegebenes Testgerät>
+-> Initiate live response session (Liveantwortsitzung initiieren)
 ```
 
 ## Aufgabe
 
-Starte eine Live-Response-Session und erfasse:
+Starte eine Live-Response (Liveantwort)-Session und erfasse:
 
 - System- und Sitzungsinformationen,
 - laufende Prozesse,
@@ -51,17 +51,17 @@ Starte eine Live-Response-Session und erfasse:
 |---|---|
 | Gerätename |  |
 | Freigabe/Ticket |  |
-| Device Group |  |
+| Device Group (Gerätegruppe) |  |
 | Gerätestatus |  |
-| Onboarding Status |  |
+| Onboarding Status (Onboardingstatus) |  |
 | Aktiver Benutzer |  |
 
 ### 2. Session starten
 
-1. Öffne die Device Page.
-2. Wähle `Initiate live response session`.
+1. Öffne die Device Page (Geräteseite).
+2. Wähle `Initiate live response session (Liveantwortsitzung initiieren)`.
 3. Warte, bis die Verbindung hergestellt ist.
-4. Prüfe Session Owner, Startzeit und Zielgerät.
+4. Prüfe Session Owner (Sitzungsverantwortlicher), Startzeit und Zielgerät.
 
 ### 3. Hilfe und verfügbare Befehle anzeigen
 
@@ -69,7 +69,7 @@ Starte eine Live-Response-Session und erfasse:
 help
 ```
 
-Dokumentiere, welche Befehle für Basic und Advanced Live Response sichtbar sind.
+Dokumentiere, welche Befehle für Basic und Advanced Live Response (Erweiterte Liveantwort) sichtbar sind.
 
 ### 4. Prozesse anzeigen
 
@@ -122,11 +122,11 @@ Nutze nur eine bekannte, ungefährliche Systemdatei, beispielsweise:
 fileinfo C:\Windows\System32\notepad.exe
 ```
 
-Falls der Befehl im aktuellen Live-Response-Client anders benannt oder nicht verfügbar ist, zuerst `help` verwenden und die Portalhilfe beachten.
+Falls der Befehl im aktuellen Live-Response (Liveantwort)-Client anders benannt oder nicht verfügbar ist, zuerst `help` verwenden und die Portalhilfe beachten.
 
 Optional kann eine Datei zur Defender-Analyse eingereicht werden, aber nur nach Freigabe. In der Übung erfolgt keine Einreichung unbekannter Dateien.
 
-### 8. Command Log prüfen
+### 8. Command Log (Befehlsprotokoll) prüfen
 
 Dokumentiere:
 
@@ -137,7 +137,7 @@ Dokumentiere:
 
 ### 9. Session beenden
 
-1. Wähle `Disconnect session`.
+1. Wähle `Disconnect session (Sitzung trennen)`.
 2. Bestätige die Trennung.
 3. Prüfe, dass die Session beendet ist.
 4. Ergänze Ticket oder Übungsdokumentation.
@@ -180,7 +180,7 @@ Get-AuthenticodeSignature -FilePath $FilePath
 
 ## KQL-Ergänzung
 
-Die in Live Response beobachteten Prozesse mit der historischen Telemetrie vergleichen:
+Die in Live Response (Liveantwort) beobachteten Prozesse mit der historischen Telemetrie vergleichen:
 
 ```kql
 let DeviceToCheck = "DEVICE-NAME-HERE";
@@ -210,20 +210,20 @@ DeviceNetworkEvents
 
 Die Teilnehmer können:
 
-- eine Live-Response-Session eindeutig einem Gerät zuordnen,
+- eine Live-Response (Liveantwort)-Session eindeutig einem Gerät zuordnen,
 - ausschließlich lesende Befehle verwenden,
 - Prozesse und Verbindungen grob einordnen,
-- Live-Response-Daten mit Hunting-Telemetrie vergleichen,
+- Live-Response (Liveantwort)-Daten mit Hunting (Bedrohungssuche)-Telemetrie vergleichen,
 - die Session und Befehle nachvollziehbar dokumentieren.
 
 ## Diskussionsfragen
 
-- Wann reicht ein Investigation Package und wann ist Live Response erforderlich?
+- Wann reicht ein Investigation Package (Untersuchungspaket) und wann ist Live Response (Liveantwort) erforderlich?
 - Welche Befehle sollten nur ein kleiner Security-Admin-Kreis verwenden dürfen?
-- Wie wird verhindert, dass Live Response forensische Spuren unnötig verändert?
+- Wie wird verhindert, dass Live Response (Liveantwort) forensische Spuren unnötig verändert?
 - Darf ein MSSP Dateien vom Gerät herunterladen?
 - Welche Freigaben und Aufbewahrungsregeln werden benötigt?
 
 ## Merksatz
 
-Live Response ist keine normale Administrationskonsole. Es ist ein leistungsfähiges Incident-Response-Werkzeug und benötigt enge Rollen, Freigaben, Protokollierung und einen klaren Untersuchungszweck.
+Live Response (Liveantwort) ist keine normale Administrationskonsole. Es ist ein leistungsfähiges Incident-Response-Werkzeug und benötigt enge Rollen, Freigaben, Protokollierung und einen klaren Untersuchungszweck.

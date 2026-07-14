@@ -1,11 +1,17 @@
 # Knowledge Transfer Session 3
 ## Operativer Security-Betrieb mit Microsoft Defender XDR
 
+## Hinweis zu den Portalbezeichnungen
+
+Die Unterlagen nennen englische Bezeichnungen der Microsoft-Portale im Format `English label (deutsche Bezeichnung)`, zum Beispiel `Advanced hunting (Erweiterte Suche)`. Dadurch können die Übungen unabhängig davon verwendet werden, ob Screenshots, Microsoft-Dokumentation oder die deutsche Portaloberfläche genutzt werden. Microsoft kann Menübezeichnungen durch Portalupdates geringfügig ändern.
+
+---
+
 ## Ziel der Session
 
 Die Teilnehmer sollen lernen, wie ein Sicherheitsfall nach der Migration von McAfee/Trellix zu Microsoft Defender for Endpoint im täglichen Betrieb strukturiert bearbeitet wird.
 
-Der Schwerpunkt liegt nicht mehr nur auf der Frage, ob ein Gerät technisch onboarded und geschützt ist. In Session 3 geht es darum, wie die interne IT einen Incident priorisiert, untersucht, mit Advanced Hunting vertieft, geeignete Response Actions auswählt und die Zusammenarbeit mit einem MSSP sowie dem späteren Microsoft Sentinel organisiert.
+Der Schwerpunkt liegt nicht mehr nur auf der Frage, ob ein Gerät technisch onboarded und geschützt ist. In Session 3 geht es darum, wie die interne IT einen Incident priorisiert, untersucht, mit Advanced Hunting (Erweiterte Suche) vertieft, geeignete Response Actions (Antwortaktionen) auswählt und die Zusammenarbeit mit einem MSSP sowie dem späteren Microsoft Sentinel organisiert.
 
 Der operative Grundablauf lautet:
 
@@ -13,15 +19,15 @@ Der operative Grundablauf lautet:
 Incident erkennen
 -> priorisieren
 -> zuweisen
--> Alerts und Evidence untersuchen
+-> Alerts (Warnungen) und Evidence (Beweise) untersuchen
 -> Scope mit KQL erweitern
 -> AIR-Ergebnisse prüfen
--> Response Action auswählen
+-> Response Action (Antwortaktion) auswählen
 -> dokumentieren und eskalieren
 -> Incident kontrolliert abschließen
 ```
 
-Diese Session ersetzt keine vollständige SOC- oder Forensik-Ausbildung. Die interne IT soll jedoch in der Lage sein, den Gerätekontext, Benutzerkontext und Business Impact zu liefern, Standardmaßnahmen zu verstehen und Entscheidungen des MSSP nachvollziehen zu können.
+Diese Session ersetzt keine vollständige SOC- oder Forensik-Ausbildung. Die interne IT soll jedoch in der Lage sein, den Gerätekontext, Benutzerkontext und Business Impact (betriebliche Auswirkung) zu liefern, Standardmaßnahmen zu verstehen und Entscheidungen des MSSP nachvollziehen zu können.
 
 ---
 
@@ -29,29 +35,29 @@ Diese Session ersetzt keine vollständige SOC- oder Forensik-Ausbildung. Die int
 
 Nach dieser Session können die Teilnehmer:
 
-- neue Incidents in der Incident Queue priorisieren,
-- Severity, Status, Assignment, Classification und Determination unterscheiden,
-- einen Incident anhand von Alerts, Evidence, Entities und Attack Story untersuchen,
-- die Device Page und Device Timeline in die Incident-Bewertung einbeziehen,
+- neue Incidents in der Incident Queue (Incidentwarteschlange) priorisieren,
+- Severity (Schweregrad), Status, Assignment (Zuweisung), Classification (Klassifizierung) und Determination (Bestimmung) unterscheiden,
+- einen Incident anhand von Alerts (Warnungen), Evidence (Beweise), Entities (Entitäten) und Attack Story (Angriffsgeschichte) untersuchen,
+- die Device Page (Geräteseite) und Device Timeline (Gerätezeitachse) in die Incident-Bewertung einbeziehen,
 - einfache KQL-Abfragen erstellen und bestehende Queries anpassen,
 - ähnliche Aktivitäten auf weiteren Geräten suchen,
-- Ergebnisse einer Automated Investigation nachvollziehen,
-- Pending und Completed Actions im Action Center prüfen,
-- zwischen AV Scan, Investigation Package, Isolation, App Restriction und Live Response unterscheiden,
-- den Business Impact einer Response Action bewerten,
-- eine Custom Detection Rule fachlich und technisch entwerfen,
+- Ergebnisse einer Automated Investigation (Automatisierte Untersuchung) nachvollziehen,
+- Pending (Ausstehend) und Completed Actions (abgeschlossene Aktionen) im Action Center (Aktionscenter) prüfen,
+- zwischen AV Scan (Antivirusscan), Investigation Package (Untersuchungspaket), Isolation, App Restriction (App-Einschränkung) und Live Response (Liveantwort) unterscheiden,
+- den Business Impact (betriebliche Auswirkung) einer Response Action (Antwortaktion) bewerten,
+- eine Custom Detection Rule (benutzerdefinierte Erkennungsregel) fachlich und technisch entwerfen,
 - Aufgaben zwischen interner IT, MSSP und später Microsoft Sentinel abgrenzen,
 - einen Incident nachvollziehbar dokumentieren und schließen.
 
 ---
 
-## 1. Vom Alert zum Incident
+## 1. Vom Alert (Warnung) zum Incident
 
-### Alert
+### Alert (Warnung)
 
-Ein Alert ist eine einzelne sicherheitsrelevante Erkennung. Er kann beispielsweise durch Endpoint-Telemetrie, Defender Antivirus, Defender for Office 365, Defender for Identity oder eine Custom Detection Rule entstehen.
+Ein Alert (Warnung) ist eine einzelne sicherheitsrelevante Erkennung. Er kann beispielsweise durch Endpoint-Telemetrie, Defender Antivirus, Defender for Office 365, Defender for Identity oder eine Custom Detection Rule (benutzerdefinierte Erkennungsregel) entstehen.
 
-Ein Alert beantwortet zunächst:
+Ein Alert (Warnung) beantwortet zunächst:
 
 ```text
 Welche verdächtige Aktivität wurde erkannt?
@@ -59,7 +65,7 @@ Welche verdächtige Aktivität wurde erkannt?
 
 ### Incident
 
-Ein Incident ist der übergeordnete Sicherheitsfall. Microsoft Defender XDR korreliert zusammengehörige Alerts, Evidence und Assets zu einer gemeinsamen Angriffsgeschichte.
+Ein Incident ist der übergeordnete Sicherheitsfall. Microsoft Defender XDR korreliert zusammengehörige Alerts (Warnungen), Evidence (Beweise) und Assets (Bestand) zu einer gemeinsamen Angriffsgeschichte.
 
 Ein Incident beantwortet:
 
@@ -69,16 +75,16 @@ Welche zusammenhängende Angriffsgeschichte ergibt sich aus allen Signalen?
 
 | Ebene | Beispiel |
 |---|---|
-| Alert 1 | Office-Anwendung startet PowerShell |
-| Alert 2 | PowerShell lädt eine Datei herunter |
-| Alert 3 | Datei verbindet sich zu externer IP-Adresse |
+| Alert (Warnung) 1 | Office-Anwendung startet PowerShell |
+| Alert (Warnung) 2 | PowerShell lädt eine Datei herunter |
+| Alert (Warnung) 3 | Datei verbindet sich zu externer IP-Adresse |
 | Incident | Mögliche Kompromittierung eines Windows-11-Clients durch schädliches Office-Dokument |
 
-### Warum nicht nur den einzelnen Alert bearbeiten?
+### Warum nicht nur den einzelnen Alert (Warnung) bearbeiten?
 
-Ein einzelner Alert kann nur einen Ausschnitt zeigen. Erst der Incident-Kontext zeigt:
+Ein einzelner Alert (Warnung) kann nur einen Ausschnitt zeigen. Erst der Incident-Kontext zeigt:
 
-- weitere Alerts,
+- weitere Alerts (Warnungen),
 - mehrere betroffene Geräte,
 - beteiligte Benutzer,
 - Dateien und Hashes,
@@ -86,7 +92,7 @@ Ein einzelner Alert kann nur einen Ausschnitt zeigen. Erst der Incident-Kontext 
 - zeitliche Zusammenhänge,
 - bereits erfolgte automatische Maßnahmen.
 
-**Merksatz:** Ein Alert ist ein Signal. Ein Incident ist der zusammenhängende Sicherheitsfall.
+**Merksatz:** Ein Alert (Warnung) ist ein Signal. Ein Incident ist der zusammenhängende Sicherheitsfall.
 
 ---
 
@@ -96,30 +102,30 @@ Ein konsistenter Incident Lifecycle verhindert, dass Incidents unbearbeitet blei
 
 | Phase | Typische Tätigkeit | Ergebnis |
 |---|---|---|
-| New | Incident erscheint in der Queue | Noch nicht bewertet |
-| Triage | Severity, Assets, Scope und Dringlichkeit prüfen | Priorität und Zuständigkeit stehen fest |
-| In progress | Incident wird aktiv untersucht | Evidence und Business-Kontext werden gesammelt |
+| New (Neu) | Incident erscheint in der Queue | Noch nicht bewertet |
+| Triage | Severity (Schweregrad), Assets (Bestand), Scope und Dringlichkeit prüfen | Priorität und Zuständigkeit stehen fest |
+| In progress (In Bearbeitung) | Incident wird aktiv untersucht | Evidence (Beweise) und Business-Kontext werden gesammelt |
 | Containment | Ausbreitung oder weitere Aktivität wird begrenzt | Risiko kurzfristig reduziert |
-| Remediation | Schädliche Artefakte und Ursachen werden entfernt | Gerät oder Benutzer ist bereinigt |
+| Remediation (Behebung) | Schädliche Artefakte und Ursachen werden entfernt | Gerät oder Benutzer ist bereinigt |
 | Recovery | Gerät und Fachprozess werden kontrolliert normalisiert | Betrieb wiederhergestellt |
-| Resolved | Classification, Determination und Dokumentation vollständig | Incident nachvollziehbar abgeschlossen |
+| Resolved (Gelöst) | Classification (Klassifizierung), Determination (Bestimmung) und Dokumentation vollständig | Incident nachvollziehbar abgeschlossen |
 
 ### Wichtige Felder
 
 | Feld | Zweck |
 |---|---|
-| Severity | Technische Kritikalität und potenzieller Schaden |
-| Priority | Reihenfolge der Bearbeitung unter Einbeziehung von Kontext |
-| Status | New, In progress oder Resolved |
-| Assigned to | Verantwortliche Person oder Team |
-| Classification | True Positive, False Positive oder Informational/Expected Activity je nach Portaloptionen |
-| Determination | Genauere Ursache, beispielsweise Malware, Phishing, Benign Positive oder Test Activity |
-| Tags | Zusätzlicher Kontext, z. B. Pilot, VIP, kritischer Fachbereich oder MSSP |
-| Comments | Nachvollziehbare Entscheidungen und Maßnahmen |
+| Severity (Schweregrad) | Technische Kritikalität und potenzieller Schaden |
+| Priority (Priorität) | Reihenfolge der Bearbeitung unter Einbeziehung von Kontext |
+| Status | New (Neu), In progress (In Bearbeitung) oder Resolved (Gelöst) |
+| Assigned to (Zuweisen zu) | Verantwortliche Person oder Team |
+| Classification (Klassifizierung) | True Positive (Richtig positiv), False Positive (Falsch positiv) oder Informational/Expected Activity (Informativ/Erwartete Aktivität) je nach Portaloptionen |
+| Determination (Bestimmung) | Genauere Ursache, beispielsweise Malware, Phishing, Benign Positive (Legitim positiv) oder Test Activity (Testaktivität) |
+| Tags (Incidenttags) | Zusätzlicher Kontext, z. B. Pilot, VIP, kritischer Fachbereich oder MSSP |
+| Comments (Kommentare) | Nachvollziehbare Entscheidungen und Maßnahmen |
 
-### Severity ist nicht gleich Business Priority
+### Severity (Schweregrad) ist nicht gleich Business Priority (Priorität)
 
-Ein Medium Alert auf einem Leitstellen-, Admin- oder Management-Gerät kann dringender sein als ein High Alert auf einem bereits isolierten Testgerät.
+Ein Medium (Mittel) Alert (Warnung) auf einem Leitstellen-, Admin- oder Management-Gerät kann dringender sein als ein High (Hoch) Alert (Warnung) auf einem bereits isolierten Testgerät.
 
 Priorisierung sollte mindestens berücksichtigen:
 
@@ -135,7 +141,7 @@ Priorisierung sollte mindestens berücksichtigen:
 
 ---
 
-## 3. Incident Investigation
+## 3. Incident Investigation (Untersuchung)
 
 Eine strukturierte Untersuchung beginnt mit der Incident-Übersicht und bewegt sich anschließend in die Details.
 
@@ -144,53 +150,53 @@ Eine strukturierte Untersuchung beginnt mit der Incident-Übersicht und bewegt s
 | Schritt | Leitfrage |
 |---:|---|
 | 1 | Was ist die Zusammenfassung des Incidents? |
-| 2 | Welche Alerts gehören zum Incident? |
+| 2 | Welche Alerts (Warnungen) gehören zum Incident? |
 | 3 | Welche Geräte, Benutzer und Mailboxen sind betroffen? |
-| 4 | Welche Evidence wurde als malicious, suspicious oder clean bewertet? |
-| 5 | Was zeigt die Attack Story beziehungsweise Alert Story? |
-| 6 | Was geschah vor und nach dem Alert? |
+| 4 | Welche Evidence (Beweise) wurde als malicious, suspicious oder clean bewertet? |
+| 5 | Was zeigt die Attack Story (Angriffsgeschichte) beziehungsweise Alert Story (Warnungsverlauf)? |
+| 6 | Was geschah vor und nach dem Alert (Warnung)? |
 | 7 | Gibt es dieselbe Aktivität auf weiteren Geräten? |
 | 8 | Hat AIR bereits Maßnahmen ausgeführt oder vorgeschlagen? |
 | 9 | Besteht noch aktive Gefahr? |
 | 10 | Welche technische und organisatorische Reaktion ist angemessen? |
 
-### Evidence und Entities
+### Evidence (Beweise) und Entities (Entitäten)
 
 | Begriff | Bedeutung | Beispiele |
 |---|---|---|
-| Evidence | Konkretes Untersuchungsobjekt | Datei, Prozess, Registry Key, E-Mail, URL |
-| Entity | Sicherheitsrelevantes Objekt im Zusammenhang | Benutzer, Gerät, IP-Adresse, Mailbox |
-| Affected Asset | Betroffenes schützenswertes System oder Konto | Client, Server, Benutzerkonto |
-| Verdict | Bewertung einer Evidence | Malicious, Suspicious, No threats found |
+| Evidence (Beweise) | Konkretes Untersuchungsobjekt | Datei, Prozess, Registry Key, E-Mail, URL |
+| Entity (Entität) | Sicherheitsrelevantes Objekt im Zusammenhang | Benutzer, Gerät, IP-Adresse, Mailbox |
+| Affected Asset (betroffene Ressource) | Betroffenes schützenswertes System oder Konto | Client, Server, Benutzerkonto |
+| Verdict (Bewertung) | Bewertung einer Evidence (Beweise) | Malicious (Bösartig), Suspicious (Verdächtig), No threats found (Keine Bedrohungen gefunden) |
 
-Eine Microsoft-Signatur oder ein normaler Dateiname beweist nicht, dass eine Aktivität legitim ist. Entscheidend bleibt der Kontext aus Pfad, Parent-Prozess, Command Line, Benutzer, Zeitpunkt und Folgeaktivität.
+Eine Microsoft-Signatur oder ein normaler Dateiname beweist nicht, dass eine Aktivität legitim ist. Entscheidend bleibt der Kontext aus Pfad, Parent-Prozess, Command Line (Befehlszeile), Benutzer, Zeitpunkt und Folgeaktivität.
 
 ---
 
-## 4. Device Investigation und Timeline
+## 4. Device (Gerät) Investigation (Untersuchung) und Timeline (Zeitachse)
 
-Die Device Page liefert den Endpunktkontext zu einem Incident.
+Die Device Page (Geräteseite) liefert den Endpunktkontext zu einem Incident.
 
 Wichtige Bereiche:
 
-- Overview,
-- Alerts,
-- Timeline,
-- Security recommendations,
-- Software inventory,
-- Logged-on users,
-- Response actions,
-- Action Center beziehungsweise Action History.
+- Overview (Übersicht),
+- Alerts (Warnungen),
+- Timeline (Zeitachse),
+- Security recommendations (Sicherheitsempfehlungen),
+- Software inventory (Softwarebestand),
+- Logged-on users (angemeldete Benutzer),
+- Response actions (Antwortaktionen),
+- Action Center (Aktionscenter) beziehungsweise Action History (Aktionsverlauf).
 
-### Typische Timeline-Fragen
+### Typische Timeline (Zeitachse)-Fragen
 
 - Welcher Prozess war der Ursprung?
 - Welcher Child-Prozess wurde gestartet?
-- Welche Command Line wurde verwendet?
+- Welche Command Line (Befehlszeile) wurde verwendet?
 - Wurde eine Datei erstellt oder ausgeführt?
 - Gab es Netzwerkverbindungen?
 - Wurde ein Benutzerkonto verwendet?
-- Gibt es zeitlich angrenzende Alerts?
+- Gibt es zeitlich angrenzende Alerts (Warnungen)?
 - Hat Defender bereits blockiert oder remediated?
 
 ### Beispiel
@@ -206,9 +212,9 @@ Diese Prozesskette ist deutlich relevanter als der Dateiname `powershell.exe` al
 
 ---
 
-## 5. Advanced Hunting und KQL
+## 5. Advanced Hunting (Erweiterte Suche) und KQL
 
-Advanced Hunting beantwortet Fragen, die eine einzelne Portalansicht nicht vollständig beantworten kann.
+Advanced Hunting (Erweiterte Suche) beantwortet Fragen, die eine einzelne Portalansicht nicht vollständig beantworten kann.
 
 Typische Betriebsfragen:
 
@@ -217,9 +223,9 @@ Typische Betriebsfragen:
 - Trat die Aktivität nur einmal oder tenantweit auf?
 - Welche Geräte zeigen ähnliche Command Lines?
 - Gibt es weitere Netzwerkverbindungen zur gleichen IP-Adresse?
-- Welche Alerts wurden von einer bestimmten Detection Source erzeugt?
+- Welche Alerts (Warnungen) wurden von einer bestimmten Detection Source (Erkennungsquelle) erzeugt?
 
-### Grundaufbau einer Query
+### Grundaufbau einer Query (Abfrage)
 
 ```kql
 DeviceProcessEvents
@@ -251,8 +257,8 @@ DeviceProcessEvents
 
 | Tabelle | Typische Nutzung |
 |---|---|
-| `AlertInfo` | Alerttitel, Severity, Quelle und Detection Source |
-| `AlertEvidence` | Dateien, Benutzer, Geräte, E-Mails, URLs und IPs zu Alerts |
+| `AlertInfo` | Alerttitel, Severity (Schweregrad), Quelle und Detection Source (Erkennungsquelle) |
+| `AlertEvidence` | Dateien, Benutzer, Geräte, E-Mails, URLs und IPs zu Alerts (Warnungen) |
 | `DeviceProcessEvents` | Prozessstarts und Prozessketten |
 | `DeviceNetworkEvents` | Netzwerkverbindungen |
 | `DeviceFileEvents` | Dateioperationen |
@@ -266,26 +272,26 @@ DeviceProcessEvents
 - Nur benötigte Spalten projizieren.
 - Ergebnisse immer im Business-Kontext bewerten.
 - Queries versionieren und beschreiben.
-- Eine Query nicht automatisch zu einer Detection Rule machen, bevor False Positives geprüft wurden.
+- Eine Query (Abfrage) nicht automatisch zu einer Detection Rule (Erkennungsregel) machen, bevor False Positives (Falsch-positive Ergebnisse) geprüft wurden.
 
 ---
 
-## 6. Automated Investigation & Response
+## 6. Automated Investigation & Response (Automatisierte Untersuchung und Reaktion)
 
-AIR untersucht unterstützte Alerts und verdächtige Entities automatisiert. Dabei werden Evidence-Verdicts erzeugt und abhängig vom Automation Level Remediation Actions automatisch durchgeführt oder zur Freigabe vorgelegt.
+AIR untersucht unterstützte Alerts (Warnungen) und verdächtige Entities (Entitäten) automatisiert. Dabei werden Evidence (Beweise)-Verdicts (Bewertungen) erzeugt und abhängig vom Automation Level (Automatisierungsebene) Remediation Actions (Behebungsaktionen) automatisch durchgeführt oder zur Freigabe vorgelegt.
 
 ### Typische AIR-Ergebnisse
 
 | Ergebnis | Bedeutung |
 |---|---|
-| Malicious | Evidence wurde als bösartig bewertet |
-| Suspicious | Evidence ist verdächtig, aber nicht eindeutig bösartig |
-| No threats found | Automatisierte Untersuchung fand keine bestätigte Bedrohung |
-| Pending approval | Maßnahme wartet auf manuelle Freigabe |
-| Remediated | Maßnahme wurde ausgeführt |
-| Partially remediated | Nur ein Teil der gefundenen Probleme wurde behoben |
+| Malicious (Bösartig) | Evidence (Beweise) wurde als bösartig bewertet |
+| Suspicious (Verdächtig) | Evidence (Beweise) ist verdächtig, aber nicht eindeutig bösartig |
+| No threats found (Keine Bedrohungen gefunden) | Automatisierte Untersuchung fand keine bestätigte Bedrohung |
+| Pending approval (Genehmigung ausstehend) | Maßnahme wartet auf manuelle Freigabe |
+| Remediated (Behoben) | Maßnahme wurde ausgeführt |
+| Partially remediated (Teilweise behoben) | Nur ein Teil der gefundenen Probleme wurde behoben |
 
-### Mögliche Remediation Actions
+### Mögliche Remediation Actions (Behebungsaktionen)
 
 - Datei in Quarantäne verschieben,
 - Prozess beenden,
@@ -294,28 +300,28 @@ AIR untersucht unterstützte Alerts und verdächtige Entities automatisiert. Dab
 - Scheduled Task entfernen,
 - Treiber deaktivieren.
 
-### Automation Levels
+### Automation Levels (Automatisierungsebenen)
 
-Das Automation Level wird im MDE-Kontext über Device Groups gesteuert. Je nach Einstellung werden Maßnahmen automatisch durchgeführt oder müssen genehmigt werden.
+Das Automation Level (Automatisierungsebene) wird im MDE-Kontext über Device Groups (Gerätegruppen) gesteuert. Je nach Einstellung werden Maßnahmen automatisch durchgeführt oder müssen genehmigt werden.
 
 **Wichtig:** AIR reduziert manuellen Aufwand, ersetzt aber nicht die abschließende Incident-Bewertung. Die IT muss prüfen, was untersucht, bewertet und verändert wurde.
 
 ---
 
-## 7. Action Center
+## 7. Action Center (Aktionscenter)
 
-Das Action Center ist die zentrale Nachweisstelle für automatisierte und manuelle Aktionen.
+Das Action Center (Aktionscenter) ist die zentrale Nachweisstelle für automatisierte und manuelle Aktionen.
 
 Dort werden unter anderem angezeigt:
 
-- Pending Actions,
-- Completed Actions beziehungsweise History,
+- Pending Actions (ausstehende Aktionen),
+- Completed Actions (abgeschlossene Aktionen) beziehungsweise History (Verlauf),
 - Quelle der Aktion,
 - ausführender Benutzer oder Automation,
 - Zeitpunkt,
 - Zielgerät oder Datei,
 - Status und Fehler,
-- Möglichkeit zur Freigabe, Ablehnung oder teilweise zum Undo.
+- Möglichkeit zur Freigabe, Ablehnung oder teilweise zum Undo (Rückgängig machen).
 
 ### Betriebsfragen
 
@@ -324,27 +330,27 @@ Dort werden unter anderem angezeigt:
 - War die Aktion erfolgreich?
 - Wurde sie auf dem richtigen Gerät ausgeführt?
 - Muss eine legitime Datei wiederhergestellt werden?
-- Ist das Gerät nach der Remediation weiterhin gefährdet?
+- Ist das Gerät nach der Remediation (Behebung) weiterhin gefährdet?
 
 ---
 
-## 8. Response Actions
+## 8. Response Actions (Antwortaktionen)
 
-Response Actions haben unterschiedliche Eingriffstiefen.
+Response Actions (Antwortaktionen) haben unterschiedliche Eingriffstiefen.
 
 | Aktion | Zweck | Betriebswirkung |
 |---|---|---|
-| Run antivirus scan | Nach bekannter Malware oder Dateien suchen | Gering bis mittel |
-| Collect investigation package | Forensische und Systemartefakte sammeln | Gering bis mittel |
-| Initiate automated investigation | Automatisierte Analyse eines Geräts starten | Gering bis mittel |
-| Restrict app execution | Ausführung auf vertrauenswürdige/Microsoft-signierte Anwendungen begrenzen | Hoch |
-| Isolate device | Netzwerkkommunikation stark einschränken | Hoch |
-| Live Response | Direkte Remote-Untersuchung und mögliche Remediation | Hoch, abhängig von Befehlen |
-| Stop and quarantine file | Schädliche Datei stoppen und isolieren | Mittel bis hoch |
+| Run antivirus scan (Antivirusscan ausführen) | Nach bekannter Malware oder Dateien suchen | Gering bis mittel |
+| Collect investigation package (Untersuchungspaket sammeln) | Forensische und Systemartefakte sammeln | Gering bis mittel |
+| Initiate automated investigation (Automatisierte Untersuchung initiieren) | Automatisierte Analyse eines Geräts starten | Gering bis mittel |
+| Restrict app execution (App-Ausführung einschränken) | Ausführung auf vertrauenswürdige/Microsoft-signierte Anwendungen begrenzen | Hoch |
+| Isolate device (Gerät isolieren) | Netzwerkkommunikation stark einschränken | Hoch |
+| Live Response (Liveantwort) | Direkte Remote-Untersuchung und mögliche Remediation (Behebung) | Hoch, abhängig von Befehlen |
+| Stop and quarantine file (Datei beenden und unter Quarantäne stellen) | Schädliche Datei stoppen und isolieren | Mittel bis hoch |
 
-### Wann reicht ein AV Scan?
+### Wann reicht ein AV Scan (Antivirusscan)?
 
-Ein AV Scan ist eine geeignete erste Maßnahme, wenn eine verdächtige Datei geprüft werden soll und keine Hinweise auf aktive Kompromittierung, Credential Theft, laterale Bewegung oder laufende Command-and-Control-Kommunikation vorliegen.
+Ein AV Scan (Antivirusscan) ist eine geeignete erste Maßnahme, wenn eine verdächtige Datei geprüft werden soll und keine Hinweise auf aktive Kompromittierung, Credential Theft, laterale Bewegung oder laufende Command-and-Control-Kommunikation vorliegen.
 
 Ein Scan reicht nicht aus, wenn:
 
@@ -356,7 +362,7 @@ Ein Scan reicht nicht aus, wenn:
 
 ---
 
-## 9. Device Isolation
+## 9. Device Isolation (Geräteisolation)
 
 Die Isolation trennt ein Gerät weitgehend vom Netzwerk, während erforderliche Defender-Kommunikation grundsätzlich erhalten bleiben soll.
 
@@ -365,7 +371,7 @@ Die Isolation trennt ein Gerät weitgehend vom Netzwerk, während erforderliche 
 - aktive Angreiferkommunikation unterbrechen,
 - Datenabfluss reduzieren,
 - laterale Bewegung erschweren,
-- Zeit für Untersuchung und Remediation gewinnen.
+- Zeit für Untersuchung und Remediation (Behebung) gewinnen.
 
 ### Vor der Isolation prüfen
 
@@ -380,7 +386,7 @@ Die Isolation trennt ein Gerät weitgehend vom Netzwerk, während erforderliche 
 
 ### Nach der Isolation
 
-- Status im Action Center prüfen,
+- Status im Action Center (Aktionscenter) prüfen,
 - Benutzer und Service Desk informieren,
 - Incident und Ticket aktualisieren,
 - Untersuchung fortsetzen,
@@ -390,9 +396,9 @@ Die Isolation trennt ein Gerät weitgehend vom Netzwerk, während erforderliche 
 
 ---
 
-## 10. Live Response
+## 10. Live Response (Liveantwort)
 
-Live Response stellt eine abgesicherte Remote-Shell auf einem onboarded Gerät bereit. Sie ist für tiefere Untersuchungen und gezielte Reaktionen gedacht.
+Live Response (Liveantwort) stellt eine abgesicherte Remote-Shell auf einem onboarded Gerät bereit. Sie ist für tiefere Untersuchungen und gezielte Reaktionen gedacht.
 
 Mögliche Aufgaben:
 
@@ -400,30 +406,30 @@ Mögliche Aufgaben:
 - Dateien analysieren,
 - Artefakte herunterladen,
 - freigegebene Skripte aus der Library ausführen,
-- Remediation Actions durchführen oder rückgängig machen.
+- Remediation Actions (Behebungsaktionen) durchführen oder rückgängig machen.
 
 ### Risiken
 
 - direkte Änderungen auf einem möglicherweise kompromittierten System,
 - mögliche Veränderung forensischer Artefakte,
-- Business Impact durch Stoppen von Prozessen oder Löschen von Dateien,
+- Business Impact (betriebliche Auswirkung) durch Stoppen von Prozessen oder Löschen von Dateien,
 - Missbrauch bei zu weit gefassten Rollen,
 - Übertragung sensibler Dateien.
 
 ### Governance
 
-- separate Rollen für Basic und Advanced Live Response,
+- separate Rollen für Basic und Advanced Live Response (Erweiterte Liveantwort),
 - nur freigegebene Test- oder Incident-Geräte,
 - Ticketreferenz und Zweck dokumentieren,
-- Command Log sichern,
+- Command Log (Befehlsprotokoll) sichern,
 - keine unbekannten Skripte oder Binaries hochladen,
 - Vier-Augen-Prinzip für eingreifende Maßnahmen erwägen.
 
 ---
 
-## 11. Custom Detection Rules
+## 11. Custom Detection Rules (benutzerdefinierte Erkennungsregeln)
 
-Eine Custom Detection Rule führt eine Advanced-Hunting-Query regelmäßig aus und erzeugt bei Treffern Alerts.
+Eine Custom Detection Rule (benutzerdefinierte Erkennungsregel) führt eine Advanced-Hunting (Bedrohungssuche)-Query (Abfrage) regelmäßig aus und erzeugt bei Treffern Alerts (Warnungen).
 
 Geeignete Anwendungsfälle:
 
@@ -438,15 +444,15 @@ Geeignete Anwendungsfälle:
 | Kriterium | Leitfrage |
 |---|---|
 | Eindeutiger Use Case | Welches Risiko soll erkannt werden? |
-| Stabile Query | Liefert sie reproduzierbare Ergebnisse? |
+| Stabile Query (Abfrage) | Liefert sie reproduzierbare Ergebnisse? |
 | Niedrige False-Positive-Rate | Wurden legitime Anwendungen geprüft? |
-| Relevante Entity | Wird Device, Account oder Mailbox korrekt zugeordnet? |
+| Relevante Entity (Entität) | Wird Device (Gerät), Account (Konto) oder Mailbox korrekt zugeordnet? |
 | Verständlicher Titel | Erkennt ein Operator sofort das Problem? |
-| Passende Severity | Entspricht sie Risiko und Scope? |
+| Passende Severity (Schweregrad) | Entspricht sie Risiko und Scope? |
 | Runbook | Wer untersucht und reagiert bei einem Treffer? |
 | Review | Wird die Regel regelmäßig überprüft? |
 
-Eine Custom Detection darf nicht nur technisch funktionieren. Sie muss auch einen definierten Bearbeitungsprozess besitzen.
+Eine Custom Detection (benutzerdefinierte Erkennung) darf nicht nur technisch funktionieren. Sie muss auch einen definierten Bearbeitungsprozess besitzen.
 
 ---
 
@@ -472,9 +478,9 @@ Microsoft Sentinel ist ein SIEM- und SOAR-System. Es kann zusätzliche Datenquel
 | Defender XDR | Microsoft Sentinel |
 |---|---|
 | Tiefer Microsoft-Security- und Endpoint-Kontext | Breite Datenquellen über Microsoft hinaus |
-| Device Timeline und Response Actions | SIEM-Korrelation, Analytics und Automation |
-| AIR und Action Center | Playbooks und SOAR-Prozesse |
-| Advanced Hunting über Defender-Daten | KQL über Sentinel- und Defender-Daten im einheitlichen Portal |
+| Device Timeline (Gerätezeitachse) und Response Actions (Antwortaktionen) | SIEM-Korrelation, Analytics und Automation |
+| AIR und Action Center (Aktionscenter) | Playbooks und SOAR-Prozesse |
+| Advanced Hunting (Erweiterte Suche) über Defender-Daten | KQL über Sentinel- und Defender-Daten im einheitlichen Portal |
 
 Für den Kunden bedeutet dies: Die interne IT sollte Defender XDR bereits sicher bedienen können, bevor Sentinel zusätzliche Logquellen und übergreifende Use Cases einführt.
 
@@ -488,10 +494,10 @@ Ein MSSP kann Monitoring, Triage und tiefe Analyse übernehmen. Die interne IT b
 |---|---|---|
 | 24/7 Monitoring | häufig verantwortlich | informiert |
 | Erste technische Triage | verantwortlich | unterstützt |
-| Device- und User-Kontext | fragt an | liefert |
+| Device (Gerät)- und User-Kontext | fragt an | liefert |
 | Business-Kritikalität | berücksichtigt | entscheidet |
 | Isolationsempfehlung | spricht aus | genehmigt nach Prozess oder delegiert |
-| Live Response | je nach Vertrag | kontrolliert und freigegeben |
+| Live Response (Liveantwort) | je nach Vertrag | kontrolliert und freigegeben |
 | Benutzerkommunikation | selten | verantwortlich |
 | Geräteersatz und Rebuild | unterstützt | verantwortlich |
 | Incident-Dokumentation | Security-Sicht | Betriebs- und Ticket-Sicht |
@@ -500,7 +506,7 @@ Ein MSSP kann Monitoring, Triage und tiefe Analyse übernehmen. Die interne IT b
 ### Mindestinformationen bei einer Eskalation
 
 - Incident- und Ticketnummer,
-- Zeitpunkt und Severity,
+- Zeitpunkt und Severity (Schweregrad),
 - betroffene Geräte und Benutzer,
 - Business-Kritikalität,
 - beobachtete Prozesskette,
@@ -517,24 +523,24 @@ Ein MSSP kann Monitoring, Triage und tiefe Analyse übernehmen. Die interne IT b
 Ein Incident sollte erst geschlossen werden, wenn mindestens folgende Fragen beantwortet sind:
 
 - Was ist passiert?
-- Welche Assets waren betroffen?
-- War der Incident ein True Positive oder False Positive?
+- Welche Assets (Bestand) waren betroffen?
+- War der Incident ein True Positive (Richtig positiv) oder False Positive (Falsch positiv)?
 - Wurde die Ursache beseitigt?
 - Wurden alle Maßnahmen erfolgreich abgeschlossen?
 - Besteht noch Restrisiko?
 - Muss ein Benutzerkennwort oder Token zurückgesetzt werden?
 - Wurde eine Ausnahme oder Policy-Änderung notwendig?
-- Sind Ticket, Kommentare und Evidence vollständig?
+- Sind Ticket, Kommentare und Evidence (Beweise) vollständig?
 - Gibt es Lessons Learned oder Folgeaufgaben?
 
 ### Abschlussvorlage
 
 | Feld | Eintrag |
 |---|---|
-| Classification |  |
-| Determination |  |
-| Root Cause |  |
-| Betroffene Assets |  |
+| Classification (Klassifizierung) |  |
+| Determination (Bestimmung) |  |
+| Root Cause (Grundursache) |  |
+| Betroffene Assets (Bestand) |  |
 | Durchgeführte Maßnahmen |  |
 | Validierung |  |
 | Restrisiko |  |
@@ -548,19 +554,19 @@ Ein Incident sollte erst geschlossen werden, wenn mindestens folgende Fragen bea
 
 | Thema | Kernaussage |
 |---|---|
-| Incident | Übergeordneter Sicherheitsfall aus korrelierten Alerts und Evidence |
+| Incident | Übergeordneter Sicherheitsfall aus korrelierten Alerts (Warnungen) und Evidence (Beweise) |
 | Triage | Technisches Risiko und Business-Kontext gemeinsam bewerten |
-| Investigation | Incident Story, Alerts, Evidence, Entities und Timeline zusammenführen |
-| Advanced Hunting | Scope und ähnliche Aktivitäten tenantweit prüfen |
-| AIR | Automatisierte Untersuchung und Remediation nachvollziehen, nicht blind vertrauen |
-| Action Center | Zentrale Nachweisstelle für Pending und Completed Actions |
-| Response Actions | Eingriffstiefe und Business Impact berücksichtigen |
+| Investigation (Untersuchung) | Incident Story (Incidentverlauf), Alerts (Warnungen), Evidence (Beweise), Entities (Entitäten) und Timeline (Zeitachse) zusammenführen |
+| Advanced Hunting (Erweiterte Suche) | Scope und ähnliche Aktivitäten tenantweit prüfen |
+| AIR | Automatisierte Untersuchung und Remediation (Behebung) nachvollziehen, nicht blind vertrauen |
+| Action Center (Aktionscenter) | Zentrale Nachweisstelle für Pending (Ausstehend) und Completed Actions (abgeschlossene Aktionen) |
+| Response Actions (Antwortaktionen) | Eingriffstiefe und Business Impact (betriebliche Auswirkung) berücksichtigen |
 | Isolation | Aktive Gefahr eindämmen, aber kontrolliert freigeben und aufheben |
-| Live Response | Leistungsfähige Remote-Untersuchung mit strenger Governance |
-| Custom Detection | Wiederkehrende kundenspezifische Erkennung mit Runbook und Review |
+| Live Response (Liveantwort) | Leistungsfähige Remote-Untersuchung mit strenger Governance |
+| Custom Detection (benutzerdefinierte Erkennung) | Wiederkehrende kundenspezifische Erkennung mit Runbook und Review |
 | Sentinel | Ergänzt Defender XDR um SIEM-, SOAR- und Drittanbieter-Daten |
 | MSSP | Übernimmt Monitoring und Analyse, interne IT liefert Kontext und Betriebsentscheidungen |
-| Incident Closure | Erst nach vollständiger Bewertung, Remediation und Dokumentation |
+| Incident Closure | Erst nach vollständiger Bewertung, Remediation (Behebung) und Dokumentation |
 
 ---
 
@@ -568,57 +574,57 @@ Ein Incident sollte erst geschlossen werden, wenn mindestens folgende Fragen bea
 
 | Begriff | Kurzbeschreibung |
 |---|---|
-| Incident | Zusammenhängender Sicherheitsfall aus Alerts, Evidence und Assets |
-| Alert | Einzelne sicherheitsrelevante Erkennung |
+| Incident | Zusammenhängender Sicherheitsfall aus Alerts (Warnungen), Evidence (Beweise) und Assets (Bestand) |
+| Alert (Warnung) | Einzelne sicherheitsrelevante Erkennung |
 | Correlation | Automatisches Zusammenführen zusammengehöriger Signale |
-| Incident Queue | Zentrale Liste der Incidents |
+| Incident Queue (Incidentwarteschlange) | Zentrale Liste der Incidents |
 | Triage | Erste Priorisierung und Zuständigkeitsklärung |
-| Severity | Technische Kritikalität |
-| Priority | Tatsächliche Bearbeitungsreihenfolge unter Einbeziehung von Kontext |
+| Severity (Schweregrad) | Technische Kritikalität |
+| Priority (Priorität) | Tatsächliche Bearbeitungsreihenfolge unter Einbeziehung von Kontext |
 | Status | Bearbeitungsstand eines Incidents |
-| Assignment | Zuweisung an Bearbeiter oder Team |
-| Classification | Grundsätzliche Bewertung, z. B. True Positive oder False Positive |
-| Determination | Genauere Ursache oder Art der Aktivität |
-| Attack Story | Grafische und zeitliche Darstellung des Angriffsverlaufs |
-| Alert Story | Detaildarstellung eines Alerts |
-| Evidence | Datei, Prozess, E-Mail, URL oder anderes Untersuchungsobjekt |
-| Entity | Benutzer, Gerät, IP oder anderes sicherheitsrelevantes Objekt |
-| Affected Asset | Betroffenes Gerät, Konto oder System |
-| Verdict | Bewertung einer Evidence |
-| Device Page | Zentrale Defender-Ansicht eines Endpoints |
-| Device Timeline | Zeitliche Endpoint-Telemetrie |
-| Parent Process | Prozess, der einen anderen Prozess gestartet hat |
-| Child Process | Von einem Parent Process gestarteter Prozess |
-| Command Line | Aufrufparameter eines Prozesses |
-| Advanced Hunting | Proaktive Abfrage von Defender- und Sentinel-Daten |
-| KQL | Kusto Query Language |
-| Schema | Tabellen- und Spaltenstruktur für Hunting Queries |
-| AlertInfo | Hunting-Tabelle für Alert-Metadaten |
-| AlertEvidence | Hunting-Tabelle für Alert-Evidence |
-| DeviceProcessEvents | Hunting-Tabelle für Prozessstarts |
-| DeviceNetworkEvents | Hunting-Tabelle für Netzwerkverbindungen |
-| DeviceFileEvents | Hunting-Tabelle für Dateiaktivitäten |
-| AIR | Automated Investigation and Response |
-| Automated Investigation | Automatisierte Untersuchung eines Alerts oder Geräts |
-| Remediation | Beseitigung einer Bedrohung oder eines Artefakts |
-| Pending Action | Maßnahme wartet auf Freigabe |
-| Action Center | Zentrale Ansicht manueller und automatisierter Aktionen |
-| Investigation Package | Sammlung technischer Artefakte eines Geräts |
-| Antivirus Scan | Lokale Malware-Prüfung eines Geräts |
-| Device Isolation | Weitgehende Netzwerkisolation eines Geräts |
+| Assignment (Zuweisung) | Zuweisung an Bearbeiter oder Team |
+| Classification (Klassifizierung) | Grundsätzliche Bewertung, z. B. True Positive (Richtig positiv) oder False Positive (Falsch positiv) |
+| Determination (Bestimmung) | Genauere Ursache oder Art der Aktivität |
+| Attack Story (Angriffsgeschichte) | Grafische und zeitliche Darstellung des Angriffsverlaufs |
+| Alert Story (Warnungsverlauf) | Detaildarstellung eines Alerts (Warnungen) |
+| Evidence (Beweise) | Datei, Prozess, E-Mail, URL oder anderes Untersuchungsobjekt |
+| Entity (Entität) | Benutzer, Gerät, IP oder anderes sicherheitsrelevantes Objekt |
+| Affected Asset (betroffene Ressource) | Betroffenes Gerät, Konto oder System |
+| Verdict (Bewertung) | Bewertung einer Evidence (Beweise) |
+| Device Page (Geräteseite) | Zentrale Defender-Ansicht eines Endpoints |
+| Device Timeline (Gerätezeitachse) | Zeitliche Endpoint-Telemetrie |
+| Parent Process (übergeordneter Prozess) | Prozess, der einen anderen Prozess gestartet hat |
+| Child Process (untergeordneter Prozess) | Von einem Parent Process (übergeordneter Prozess) gestarteter Prozess |
+| Command Line (Befehlszeile) | Aufrufparameter eines Prozesses |
+| Advanced Hunting (Erweiterte Suche) | Proaktive Abfrage von Defender- und Sentinel-Daten |
+| KQL | Kusto Query (Abfrage) Language |
+| Schema | Tabellen- und Spaltenstruktur für Hunting Queries (Suchabfragen) |
+| AlertInfo | Hunting (Bedrohungssuche)-Tabelle für Alert (Warnung)-Metadaten |
+| AlertEvidence | Hunting (Bedrohungssuche)-Tabelle für Alert (Warnung)-Evidence (Beweise) |
+| DeviceProcessEvents | Hunting (Bedrohungssuche)-Tabelle für Prozessstarts |
+| DeviceNetworkEvents | Hunting (Bedrohungssuche)-Tabelle für Netzwerkverbindungen |
+| DeviceFileEvents | Hunting (Bedrohungssuche)-Tabelle für Dateiaktivitäten |
+| AIR | Automated Investigation and Response (Automatisierte Untersuchung und Reaktion) |
+| Automated Investigation (Automatisierte Untersuchung) | Automatisierte Untersuchung eines Alerts (Warnungen) oder Geräts |
+| Remediation (Behebung) | Beseitigung einer Bedrohung oder eines Artefakts |
+| Pending Action (ausstehende Aktion) | Maßnahme wartet auf Freigabe |
+| Action Center (Aktionscenter) | Zentrale Ansicht manueller und automatisierter Aktionen |
+| Investigation Package (Untersuchungspaket) | Sammlung technischer Artefakte eines Geräts |
+| Antivirus Scan (Antivirusscan) | Lokale Malware-Prüfung eines Geräts |
+| Device Isolation (Geräteisolation) | Weitgehende Netzwerkisolation eines Geräts |
 | Restrict App Execution | Einschränkung ausführbarer Anwendungen |
-| Live Response | Remote-Shell für Untersuchung und Reaktion |
-| Custom Detection | Eigene regelmäßige Erkennung auf Basis einer Hunting Query |
-| Detection Frequency | Ausführungsintervall einer Detection Rule |
-| False Positive | Legitime Aktivität wurde fälschlich als verdächtig erkannt |
-| True Positive | Tatsächlich sicherheitsrelevante oder bösartige Aktivität |
+| Live Response (Liveantwort) | Remote-Shell für Untersuchung und Reaktion |
+| Custom Detection (benutzerdefinierte Erkennung) | Eigene regelmäßige Erkennung auf Basis einer Hunting Query (Suchabfrage) |
+| Detection Frequency (Erkennungshäufigkeit) | Ausführungsintervall einer Detection Rule (Erkennungsregel) |
+| False Positive (Falsch positiv) | Legitime Aktivität wurde fälschlich als verdächtig erkannt |
+| True Positive (Richtig positiv) | Tatsächlich sicherheitsrelevante oder bösartige Aktivität |
 | MSSP | Managed Security Service Provider |
 | SOC | Security Operations Center |
 | SIEM | Security Information and Event Management |
 | SOAR | Security Orchestration, Automation and Response |
 | Microsoft Sentinel | Microsoft SIEM- und SOAR-Plattform |
 | Escalation | Übergabe an eine zuständige oder höher priorisierte Stelle |
-| Business Impact | Betriebliche Auswirkung eines Incidents oder einer Maßnahme |
+| Business Impact (betriebliche Auswirkung) | Betriebliche Auswirkung eines Incidents oder einer Maßnahme |
 | Runbook | Standardisierter Handlungsablauf |
 | Chain of Custody | Nachvollziehbarer Umgang mit forensischen Beweismitteln |
 | Lessons Learned | Nachbereitung und Verbesserung nach einem Incident |

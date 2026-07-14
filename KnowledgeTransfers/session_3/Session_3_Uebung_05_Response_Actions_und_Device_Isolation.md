@@ -1,44 +1,44 @@
 # Session 3 - Übung 5
-## Response Actions auswählen und Device Isolation bewerten
+## Response Actions (Antwortaktionen) auswählen und Device Isolation (Geräteisolation) bewerten
 
 ## Praxissituation
 
 Ein Windows-11-Notebook zeigt verdächtige PowerShell-Aktivität und Verbindungen zu einer unbekannten externen IP-Adresse. Das MSSP empfiehlt die sofortige Isolation. Der Benutzer arbeitet jedoch in einer geschäftskritischen Abteilung und nimmt gerade an einem wichtigen Termin teil.
 
-Die interne IT muss eine schnelle, nachvollziehbare Entscheidung zwischen Sicherheitsrisiko und Business Impact treffen.
+Die interne IT muss eine schnelle, nachvollziehbare Entscheidung zwischen Sicherheitsrisiko und Business Impact (betriebliche Auswirkung) treffen.
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen geeignete Response Actions auswählen, die Voraussetzungen einer Isolation prüfen und einen Freigabe- sowie Kommunikationsprozess dokumentieren.
+Die Teilnehmer sollen geeignete Response Actions (Antwortaktionen) auswählen, die Voraussetzungen einer Isolation prüfen und einen Freigabe- sowie Kommunikationsprozess dokumentieren.
 
 ## Benötigte Berechtigungen
 
-- Leserechte auf Device Page, Incident und Action Center
-- Für echte Aktionen: Rolle für Active Remediation Actions und Zugriff auf die betreffende Device Group
+- Leserechte auf Device Page (Geräteseite), Incident und Action Center (Aktionscenter)
+- Für echte Aktionen: Rolle für Active Remediation Actions (aktive Behebungsaktionen) und Zugriff auf die betreffende Device Group (Gerätegruppe)
 - Kein produktives Isolieren ohne ausdrückliche Freigabe
 
 ## Aufgabe
 
 Bewerte das Szenario und entscheide zwischen:
 
-- Antivirus Scan,
-- Automated Investigation,
-- Investigation Package,
+- Antivirus Scan (Antivirusscan),
+- Automated Investigation (Automatisierte Untersuchung),
+- Investigation Package (Untersuchungspaket),
 - Restrict App Execution,
-- Device Isolation,
-- Live Response,
+- Device Isolation (Geräteisolation),
+- Live Response (Liveantwort),
 - Eskalation ohne direkte Aktion.
 
 ## Response-Action-Matrix
 
 | Aktion | Geeignet, wenn | Nicht ausreichend oder riskant, wenn |
 |---|---|---|
-| Quick/Full AV Scan | Verdächtige Datei, keine aktive Ausbreitung | Aktive C2-, Credential- oder Lateral-Movement-Hinweise |
-| Automated Investigation | Weitere automatische Analyse sinnvoll | Sofortige Eindämmung erforderlich |
-| Investigation Package | Artefakte für MSSP/Forensik benötigt | Aktiver Angriff muss zuerst eingedämmt werden |
+| Quick/Full AV Scan (Antivirusscan) | Verdächtige Datei, keine aktive Ausbreitung | Aktive C2-, Credential- oder Lateral-Movement-Hinweise |
+| Automated Investigation (Automatisierte Untersuchung) | Weitere automatische Analyse sinnvoll | Sofortige Eindämmung erforderlich |
+| Investigation Package (Untersuchungspaket) | Artefakte für MSSP/Forensik benötigt | Aktiver Angriff muss zuerst eingedämmt werden |
 | Restrict App Execution | Nicht vertrauenswürdige App-Ausführung stoppen | Geschäftsanwendungen könnten betroffen sein |
-| Isolate Device | Aktive Kompromittierung oder Ausbreitungsrisiko | Business Impact muss bewertet werden, verhindert aber nicht jede lokale Aktivität |
-| Live Response | Tiefe Echtzeitanalyse erforderlich | Fehlende Freigabe oder unzureichende Rollen/Governance |
+| Isolate Device (Gerät) | Aktive Kompromittierung oder Ausbreitungsrisiko | Business Impact (betriebliche Auswirkung) muss bewertet werden, verhindert aber nicht jede lokale Aktivität |
+| Live Response (Liveantwort) | Tiefe Echtzeitanalyse erforderlich | Fehlende Freigabe oder unzureichende Rollen/Governance |
 
 ## Schritt-für-Schritt-Anleitung
 
@@ -69,7 +69,7 @@ Bewerte das Szenario und entscheide zwischen:
 - Gerät ist in MDE aktiv und erreichbar.
 - Sense Sensor ist funktionsfähig.
 - Benutzer verfügt über erforderliche Defender-Rolle.
-- Zugriff auf die Device Group ist vorhanden.
+- Zugriff auf die Device Group (Gerätegruppe) ist vorhanden.
 - Proxy- und VPN-Besonderheiten sind bekannt.
 - Ticket und Freigabeprozess sind vorbereitet.
 
@@ -77,8 +77,8 @@ Bewerte das Szenario und entscheide zwischen:
 
 | Risikobild | Empfohlene Reaktion |
 |---|---|
-| Einzelne Datei, keine Folgeaktivität | Scan und Timeline-Prüfung |
-| Unklare Lage, keine aktive Ausbreitung | Investigation Package oder AIR |
+| Einzelne Datei, keine Folgeaktivität | Scan und Timeline (Zeitachse)-Prüfung |
+| Unklare Lage, keine aktive Ausbreitung | Investigation Package (Untersuchungspaket) oder AIR |
 | Aktive externe Kommunikation | Isolation ernsthaft prüfen |
 | Credential Theft/Lateral Movement | Sofortige Security-Eskalation und Isolation |
 | Wahrscheinlicher False Positive | Keine vorschnelle Isolation; Owner einbinden |
@@ -88,7 +88,7 @@ Bewerte das Szenario und entscheide zwischen:
 Nur auf einem freigegebenen Testgerät oder als Demonstration:
 
 ```text
-Assets -> Devices -> <Gerät> -> Isolate device
+Assets (Bestand) -> Devices (Geräte) -> <Gerät> -> Isolate device (Gerät isolieren)
 ```
 
 Vor Bestätigung:
@@ -110,9 +110,9 @@ Weitere Untersuchung durch MSSP/Security läuft.
 
 Prüfe:
 
-- Action Center,
-- Device Timeline,
-- Device Status,
+- Action Center (Aktionscenter),
+- Device Timeline (Gerätezeitachse),
+- Device Status (Gerätestatus),
 - Zeitpunkt und ausführende Person,
 - erfolgreiche oder fehlgeschlagene Umsetzung.
 
@@ -121,7 +121,7 @@ Prüfe:
 Eine Isolation wird erst aufgehoben, wenn:
 
 - aktive Bedrohung beendet ist,
-- Remediation erfolgreich war,
+- Remediation (Behebung) erfolgreich war,
 - Zugangsdaten bei Bedarf zurückgesetzt wurden,
 - Rebuild oder Bereinigung validiert wurde,
 - Security/MSSP die Freigabe erteilt hat,
@@ -191,9 +191,9 @@ Get-Process -Name $ProcessName -ErrorAction SilentlyContinue | ForEach-Object {
 
 | Feld | Entscheidung |
 |---|---|
-| Gewählte Response Action |  |
+| Gewählte Response Action (Antwortaktion) |  |
 | Sicherheitsbegründung |  |
-| Business Impact |  |
+| Business Impact (betriebliche Auswirkung) |  |
 | Freigabe |  |
 | Benutzerkommunikation |  |
 | Technische Validierung |  |
@@ -201,12 +201,9 @@ Get-Process -Name $ProcessName -ErrorAction SilentlyContinue | ForEach-Object {
 
 ## Diskussionsfragen
 
-- Wann ist ein AV Scan ausreichend?
-- Wann ist Isolation trotz Business Impact zwingend?
-- Wer besitzt die Freigabekompetenz außerhalb der Geschäftszeiten?
-- Was passiert, wenn ein isoliertes Gerät hinter Full-Tunnel-VPN den Defender-Dienst nicht mehr erreicht?
-- Welche Maßnahmen sind nach Credential Theft zusätzlich nötig?
+- Wann ist ein AV Scan (Antivirusscan) ausreichend?
+- Wann ist Isolation trotz Business Impact (betriebliche Auswirkung) zwingend?
 
 ## Merksatz
 
-Device Isolation ist eine Containment-Maßnahme mit hoher Wirkung. Sie muss bei aktiver Gefahr schnell, aber mit klarer Freigabe, Dokumentation und Aufhebungsbedingung eingesetzt werden.
+Device Isolation (Geräteisolation) ist eine Containment-Maßnahme mit hoher Wirkung. Sie muss bei aktiver Gefahr schnell, aber mit klarer Freigabe, Dokumentation und Aufhebungsbedingung eingesetzt werden.

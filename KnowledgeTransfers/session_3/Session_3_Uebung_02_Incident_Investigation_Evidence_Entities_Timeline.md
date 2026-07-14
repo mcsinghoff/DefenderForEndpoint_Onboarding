@@ -1,75 +1,75 @@
 # Session 3 - Übung 2
-## Incident Investigation mit Evidence, Entities und Device Timeline
+## Incident Investigation (Untersuchung) mit Evidence (Beweise), Entities (Entitäten) und Device Timeline (Gerätezeitachse)
 
 ## Praxissituation
 
-Das MSSP meldet einen Incident mit dem Hinweis: `Suspicious PowerShell activity on a Windows 11 device`. Das MSSP benötigt von der internen IT Informationen zum Benutzer, zur Gerätekritikalität und dazu, ob die Prozesskette zu einem legitimen Administrations- oder Softwareverteilungsprozess gehört.
+Das MSSP meldet einen Incident mit dem Hinweis: `Suspicious (Verdächtig) PowerShell activity on a Windows 11 device`. Das MSSP benötigt von der internen IT Informationen zum Benutzer, zur Gerätekritikalität und dazu, ob die Prozesskette zu einem legitimen Administrations- oder Softwareverteilungsprozess gehört.
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen einen Incident technisch und betrieblich untersuchen und aus Alerts, Evidence, Entities, Device Page und Timeline eine nachvollziehbare Angriffsgeschichte erstellen.
+Die Teilnehmer sollen einen Incident technisch und betrieblich untersuchen und aus Alerts (Warnungen), Evidence (Beweise), Entities (Entitäten), Device Page (Geräteseite) und Timeline (Zeitachse) eine nachvollziehbare Angriffsgeschichte erstellen.
 
 ## Benötigte Berechtigungen
 
-- Leserechte auf Incidents, Alerts, Evidence und Devices
-- Leserechte auf Device Timeline
-- Optional Advanced Hunting
-- Kein Ausführen produktiver Response Actions
+- Leserechte auf Incidents, Alerts (Warnungen), Evidence (Beweise) und Devices (Geräte)
+- Leserechte auf Device Timeline (Gerätezeitachse)
+- Optional Advanced Hunting (Erweiterte Suche)
+- Kein Ausführen produktiver Response Actions (Antwortaktionen)
 
 ## Aufgabe
 
 Untersuche einen geeigneten Beispiel-Incident und beantworte:
 
 - Welcher Prozess war der Ursprung?
-- Welche Datei oder Command Line ist relevant?
+- Welche Datei oder Command Line (Befehlszeile) ist relevant?
 - Welcher Benutzer war beteiligt?
-- Gibt es weitere Geräte oder Alerts?
-- Welche Evidence ist malicious, suspicious oder unklar?
+- Gibt es weitere Geräte oder Alerts (Warnungen)?
+- Welche Evidence (Beweise) ist malicious, suspicious oder unklar?
 - Welche Informationen fehlen für eine Entscheidung?
 
 ## Schritt-für-Schritt-Anleitung
 
-### 1. Incident Overview prüfen
+### 1. Incident Overview (Incidentübersicht) prüfen
 
 Dokumentiere:
 
 | Feld | Beobachtung |
 |---|---|
-| Incident Summary |  |
-| Severity |  |
+| Incident Summary (Incidentzusammenfassung) |  |
+| Severity (Schweregrad) |  |
 | Status |  |
-| Anzahl Alerts |  |
-| Betroffene Assets |  |
+| Anzahl Alerts (Warnungen) |  |
+| Betroffene Assets (Bestand) |  |
 | Empfohlene Aktionen |  |
-| Remediation Status |  |
+| Remediation Status (Behebungsstatus) |  |
 
-### 2. Alert Story öffnen
+### 2. Alert Story (Warnungsverlauf) öffnen
 
-Öffne den wichtigsten Alert und prüfe:
+Öffne den wichtigsten Alert (Warnung) und prüfe:
 
-- What happened,
-- Actions taken,
-- Related events,
-- Detection Source,
-- MITRE ATT&CK Technique,
+- What happened (Was ist passiert),
+- Actions taken (Durchgeführte Aktionen),
+- Related events (Zugehörige Ereignisse),
+- Detection Source (Erkennungsquelle),
+- MITRE ATT&CK Technique (MITRE-ATT&CK-Technik),
 - Prozess- oder E-Mail-Kontext.
 
-| Alert-Feld | Beobachtung |
+| Alert (Warnung)-Feld | Beobachtung |
 |---|---|
-| Alert Title |  |
-| Detection Source |  |
-| Initiating Process |  |
-| Target Process/File |  |
-| Command Line |  |
-| Account |  |
-| Device |  |
+| Alert Title (Warnungstitel) |  |
+| Detection Source (Erkennungsquelle) |  |
+| Initiating Process (auslösender Prozess) |  |
+| Target Process/File (Zielprozess/-datei) |  |
+| Command Line (Befehlszeile) |  |
+| Account (Konto) |  |
+| Device (Gerät) |  |
 | Zeitpunkt |  |
 
-### 3. Evidence und Entities auswerten
+### 3. Evidence (Beweise) und Entities (Entitäten) auswerten
 
-| Entity/Evidence | Wert | Verdict | Bewertung |
+| Entity (Entität)/Evidence (Beweise) | Wert | Verdict (Bewertung) | Bewertung |
 |---|---|---|---|
-| Device |  |  |  |
+| Device (Gerät) |  |  |  |
 | User |  |  |  |
 | File/Hash |  |  |  |
 | Process |  |  |  |
@@ -84,41 +84,41 @@ Prüfe bei Dateien:
 - erstmaliges und letztes Auftreten,
 - zugehörige Prozesse.
 
-### 4. Device Page öffnen
+### 4. Device Page (Geräteseite) öffnen
 
 Prüfe:
 
 | Bereich | Leitfrage |
 |---|---|
-| Overview | Ist das Gerät aktiv und onboarded? |
-| Alerts | Gibt es weitere Alerts? |
-| Logged-on users | Welcher Benutzer war aktiv? |
-| Timeline | Welche Ereignisse liegen vor und nach dem Alert? |
-| Software inventory | Ist die Anwendung bekannt und installiert? |
-| Response actions | Wurden bereits Aktionen ausgeführt? |
+| Overview (Übersicht) | Ist das Gerät aktiv und onboarded? |
+| Alerts (Warnungen) | Gibt es weitere Alerts (Warnungen)? |
+| Logged-on users (angemeldete Benutzer) | Welcher Benutzer war aktiv? |
+| Timeline (Zeitachse) | Welche Ereignisse liegen vor und nach dem Alert (Warnung)? |
+| Software inventory (Softwarebestand) | Ist die Anwendung bekannt und installiert? |
+| Response actions (Antwortaktionen) | Wurden bereits Aktionen ausgeführt? |
 
-### 5. Timeline eingrenzen
+### 5. Timeline (Zeitachse) eingrenzen
 
-Nutze einen engen Zeitraum, beispielsweise 15 Minuten vor bis 30 Minuten nach dem Alert.
+Nutze einen engen Zeitraum, beispielsweise 15 Minuten vor bis 30 Minuten nach dem Alert (Warnung).
 
 Suche nach:
 
-- Process events,
-- File events,
-- Network events,
-- Registry events,
-- Security-control events.
+- Process events (Prozessereignisse),
+- File events (Dateiereignisse),
+- Network events (Netzwerkereignisse),
+- Registry events (Registrierungsereignisse),
+- Security-control events (Sicherheitssteuerungsereignisse).
 
 Dokumentiere die Prozesskette:
 
 ```text
-<Parent Process>
--> <Child Process>
+<Parent Process (übergeordneter Prozess)>
+-> <Child Process (untergeordneter Prozess)>
 -> <Folgeprozess oder Datei>
 -> <Netzwerkziel>
 ```
 
-| Ebene | Prozess/Datei | Pfad oder Command Line | Bewertung |
+| Ebene | Prozess/Datei | Pfad oder Command Line (Befehlszeile) | Bewertung |
 |---:|---|---|---|
 | 1 |  |  |  |
 | 2 |  |  |  |
@@ -127,7 +127,7 @@ Dokumentiere die Prozesskette:
 
 ## KQL-Ergänzung
 
-Alerts und zugehörige Evidence verbinden:
+Alerts (Warnungen) und zugehörige Evidence (Beweise) verbinden:
 
 ```kql
 let RecentAlerts =
@@ -206,7 +206,7 @@ Get-Item $FilePath | Select-Object FullName, Length, CreationTime, LastWriteTime
 Erstelle eine kurze technische Bewertung:
 
 ```text
-Der Incident begann mit <Prozess/Alert> auf <Gerät> unter <Benutzer>.
+Der Incident begann mit <Prozess/Alert (Warnung)> auf <Gerät> unter <Benutzer>.
 Die auffällige Aktivität bestand aus <Prozesskette>.
 Weitere Datei-/Netzwerkaktivitäten: <Beschreibung>.
 Tenantweite Verbreitung: <ein Gerät / mehrere Geräte>.
@@ -216,11 +216,11 @@ Empfohlener nächster Schritt: <Aktion>.
 
 ## Diskussionsfragen
 
-- Welche Evidence ist entscheidend und welche nur Kontext?
+- Welche Evidence (Beweise) ist entscheidend und welche nur Kontext?
 - Warum reicht eine Microsoft-Signatur nicht als Freigabe?
 - Welche Business-Informationen fehlen dem MSSP typischerweise?
 - Wann sollte die Untersuchung auf weitere Geräte ausgeweitet werden?
 
 ## Merksatz
 
-Eine belastbare Incident-Bewertung entsteht erst aus dem Zusammenhang von Alert, Evidence, Entity, Prozesskette, Benutzer, Zeitpunkt und Folgeaktivität.
+Eine belastbare Incident-Bewertung entsteht erst aus dem Zusammenhang von Alert (Warnung), Evidence (Beweise), Entity (Entität), Prozesskette, Benutzer, Zeitpunkt und Folgeaktivität.

@@ -1,5 +1,5 @@
 # Session 3 - Übung 3
-## Advanced Hunting und KQL: ähnliche Aktivitäten tenantweit suchen
+## Advanced Hunting (Erweiterte Suche) und KQL: ähnliche Aktivitäten tenantweit suchen
 
 ## Praxissituation
 
@@ -9,15 +9,15 @@ Auf einem Windows-11-Gerät wurde eine auffällige PowerShell-Command-Line erkan
 Ist diese Aktivität nur auf diesem Gerät aufgetreten oder auf weiteren Clients?
 ```
 
-Eine einzelne Device Timeline beantwortet diese Frage nicht ausreichend.
+Eine einzelne Device Timeline (Gerätezeitachse) beantwortet diese Frage nicht ausreichend.
 
 ## Ziel der Übung
 
-Die Teilnehmer sollen eine KQL-Query schrittweise aufbauen, Ergebnisse gruppieren und den Scope einer möglichen Bedrohung tenantweit bewerten.
+Die Teilnehmer sollen eine KQL-Query (Abfrage) schrittweise aufbauen, Ergebnisse gruppieren und den Scope einer möglichen Bedrohung tenantweit bewerten.
 
 ## Benötigte Berechtigungen
 
-- Zugriff auf Advanced Hunting
+- Zugriff auf Advanced Hunting (Erweiterte Suche)
 - Leserechte auf Endpoint-Telemetrie
 - Kenntnis eines Testprozesses, Hashes oder Geräts
 
@@ -25,7 +25,7 @@ Die Teilnehmer sollen eine KQL-Query schrittweise aufbauen, Ergebnisse gruppiere
 
 ```text
 https://security.microsoft.com
-Hunting -> Advanced hunting
+Hunting (Bedrohungssuche) -> Advanced hunting (Erweiterte Suche)
 ```
 
 ## Aufgabe
@@ -95,7 +95,7 @@ DeviceProcessEvents
 
 Dokumentiere drei repräsentative Treffer:
 
-| Zeitpunkt | Gerät | Benutzer | Parent | Command Line | Bewertung |
+| Zeitpunkt | Gerät | Benutzer | Parent | Command Line (Befehlszeile) | Bewertung |
 |---|---|---|---|---|---|
 |  |  |  |  |  |  |
 |  |  |  |  |  |  |
@@ -167,7 +167,7 @@ DeviceNetworkEvents
 | order by Timestamp desc
 ```
 
-## Query-Optimierung
+## Query (Abfrage)-Optimierung
 
 | Gute Praxis | Begründung |
 |---|---|
@@ -176,14 +176,14 @@ DeviceNetworkEvents
 | Nur benötigte Spalten projizieren | Verbessert Lesbarkeit und Performance |
 | Erst testen, dann `join` verwenden | Komplexität schrittweise erhöhen |
 | Ergebnisse nach Häufigkeit und Geräten gruppieren | Erleichtert Scope-Bewertung |
-| Query kommentieren und speichern | Wiederverwendung und Übergabe |
+| Query (Abfrage) kommentieren und speichern | Wiederverwendung und Übergabe |
 
 ## Diskussionsfragen
 
-- Welche Teile der Query eignen sich für eine spätere Custom Detection?
+- Welche Teile der Query (Abfrage) eignen sich für eine spätere Custom Detection (benutzerdefinierte Erkennung)?
 - Welche legitimen IT-Tools können ähnliche Command Lines erzeugen?
 - Wie verhindert man eine zu große False-Positive-Rate?
 
 ## Merksatz
 
-Advanced Hunting erweitert die Sicht vom einzelnen Gerät auf den gesamten Tenant. Erst dadurch lässt sich der tatsächliche Scope einer Aktivität bewerten.
+Advanced Hunting (Erweiterte Suche) erweitert die Sicht vom einzelnen Gerät auf den gesamten Tenant. Erst dadurch lässt sich der tatsächliche Scope einer Aktivität bewerten.
