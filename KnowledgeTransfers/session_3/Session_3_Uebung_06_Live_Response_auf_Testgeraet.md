@@ -206,23 +206,13 @@ DeviceNetworkEvents
 | order by Timestamp desc
 ```
 
-## Erwartetes Ergebnis
-
-Die Teilnehmer können:
-
-- eine Live-Response (Liveantwort)-Session eindeutig einem Gerät zuordnen,
-- ausschließlich lesende Befehle verwenden,
-- Prozesse und Verbindungen grob einordnen,
-- Live-Response (Liveantwort)-Daten mit Hunting (Bedrohungssuche)-Telemetrie vergleichen,
-- die Session und Befehle nachvollziehbar dokumentieren.
 
 ## Diskussionsfragen
 
 - Wann reicht ein Investigation Package (Untersuchungspaket) und wann ist Live Response (Liveantwort) erforderlich?
-- Welche Befehle sollten nur ein kleiner Security-Admin-Kreis verwenden dürfen?
 - Wie wird verhindert, dass Live Response (Liveantwort) forensische Spuren unnötig verändert?
 - Darf ein MSSP Dateien vom Gerät herunterladen?
-- Welche Freigaben und Aufbewahrungsregeln werden benötigt?
+- Sollen Incidents Response Prozesse dokumentiert werden in der Zukunft? Welche Freigaben und Aufbewahrungsregeln werden benötigt?
 
 ## Merksatz
 

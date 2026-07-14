@@ -42,76 +42,29 @@ Wähle eine vorhandene Investigation (Untersuchung) oder Action und beantworte:
 
 ## Schritt-für-Schritt-Anleitung
 
-### 1. Investigation Details (Untersuchungsdetails) öffnen
 
-Dokumentiere:
-
-| Feld | Beobachtung |
-|---|---|
-| Investigation Name/ID (Untersuchungsname/-ID) |  |
-| Startzeit |  |
-| Auslöser | Alert (Warnung) / manuell |
-| Status |  |
-| Betroffene Geräte |  |
-| Anzahl Evidence (Beweise) |  |
-| Remediation Status (Behebungsstatus) |  |
-
-### 2. Evidence (Beweise)-Verdicts (Bewertungen) prüfen
-
-| Evidence (Beweise) | Typ | Verdict (Bewertung) | Begründung/Details | Maßnahme |
-|---|---|---|---|---|
-|  |  |  |  |  |
-|  |  |  |  |  |
-|  |  |  |  |  |
-
-Mögliche Verdicts (Bewertungen):
-
-| Verdict (Bewertung) | Bedeutung |
-|---|---|
-| Malicious (Bösartig) | Als bösartig bewertet |
-| Suspicious (Verdächtig) | Verdächtig, aber nicht eindeutig bestätigt |
-| No threats found (Keine Bedrohungen gefunden) | Keine bestätigte Bedrohung gefunden |
-
-### 3. Action Center (Aktionscenter) prüfen
+### 1. Action Center (Aktionscenter) prüfen
 
 Prüfe beide Bereiche:
 
 - `Pending (Ausstehend)`
 - `History (Verlauf)` beziehungsweise abgeschlossene Aktionen
 
-| Feld | Beobachtung |
-|---|---|
-| Action Type (Aktionstyp) |  |
-| Action Source (Aktionsquelle) |  |
-| Target (Ziel) |  |
-| Submitted by (Übermittelt von) |  |
-| Submitted Time (Übermittlungszeit) |  |
-| Status |  |
-| Related Incident (Zugehöriger Incident) |  |
-| Undo (Rückgängig machen) verfügbar? |  |
-
-### 4. Pending Action (ausstehende Aktion) bewerten
-
-Beantworte vor einer Freigabe:
-
-| Prüffrage | Antwort |
-|---|---|
-| Ist die Evidence (Beweise) tatsächlich bösartig? |  |
-| Ist der Pfad plausibel oder Teil einer Fachanwendung? |  |
-| Welche Business-Auswirkung hätte die Aktion? |  |
-| Gibt es ein Backup oder eine Wiederherstellungsmöglichkeit? |  |
-| Wer muss zustimmen? |  |
-| Ist eine schnellere Containment-Maßnahme erforderlich? |  |
+Die AIR-Investigations finden sich auch unter https://security.microsoft.com/airinvestigation
 
 ### 5. Automation Level (Automatisierungsebene) diskutieren
 
-Ermittle, ob die betroffenen Geräte einer Device Group (Gerätegruppe) mit Full-, Semi- oder No-Automation (Voll-, Teil- oder keine Automatisierung) zugeordnet sind.
+Ermittle, ob die betroffenen Geräte einer Device Group (Gerätegruppe) mit Full-, Semi- oder No-Automation (Voll-, Teil- oder keine Automatisierung) zugeordnet sind. [hierzu hilft die Anelitung aus der Microsoft Dokumentation: https://learn.microsoft.com/en-us/defender-endpoint/configure-automated-investigations-remediation?view=o365-worldwide]
+
+Beschreibung der Automations-Level-Stufen:
 
 | Automation Level (Automatisierungsebene) | Betriebswirkung |
 |---|---|
 | Full (Vollautomatisch) | Geeignete Remediation (Behebung) wird automatisch ausgeführt |
 | Semi (Teilautomatisch) | Bestimmte oder alle Maßnahmen benötigen Freigabe |
 | No automated response (Keine automatisierte Reaktion) | Keine automatische Investigation (Untersuchung)/Remediation (Behebung); nicht als Zielzustand empfohlen |
+
+**Achtung!!** Wie unter  https://learn.microsoft.com/en-us/defender-endpoint/automation-levels beschrieben, wird es bei AIR eine Änderung ab September geben und diese nicht mehr separat steuerbar sein. 
 
 ## KQL-Ergänzung
 
@@ -168,17 +121,7 @@ Get-MpThreat |
 
 > Produktive Änderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.
 
-## Erwartetes Ergebnis
 
-Erstelle einen Freigabevermerk:
-
-```text
-AIR untersuchte <Evidence (Beweise)> auf <Gerät> und vergab das Verdict (Bewertung) <Verdict (Bewertung)>.
-Vorgeschlagene/ausgeführte Maßnahme: <Action>.
-Business-Auswirkung: <Bewertung>.
-Entscheidung: <Approve (Genehmigen) / Reject (Ablehnen) / weitere Analyse>.
-Begründung und Freigabe: <Text>.
-```
 
 ## Diskussionsfragen
 

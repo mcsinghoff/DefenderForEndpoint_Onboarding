@@ -40,7 +40,7 @@ Bewerte das Szenario und entscheide zwischen:
 | Isolate Device (Gerät) | Aktive Kompromittierung oder Ausbreitungsrisiko | Business Impact (betriebliche Auswirkung) muss bewertet werden, verhindert aber nicht jede lokale Aktivität |
 | Live Response (Liveantwort) | Tiefe Echtzeitanalyse erforderlich | Fehlende Freigabe oder unzureichende Rollen/Governance |
 
-## Schritt-für-Schritt-Anleitung
+## Schritt-für-Schritt-Anleitung für die Entscheidung, welche Remediation Action gewählt wird
 
 ### 1. Aktive Gefahr bewerten
 
@@ -69,29 +69,29 @@ Bewerte das Szenario und entscheide zwischen:
 - Gerät ist in MDE aktiv und erreichbar.
 - Sense Sensor ist funktionsfähig.
 - Benutzer verfügt über erforderliche Defender-Rolle.
-- Zugriff auf die Device Group (Gerätegruppe) ist vorhanden.
+- Zugriff auf die Device Group (Gerätegruppe) ist vorhanden, wenn nach Gerätegruppe eine Einschränkung eingestellt ist.
 - Proxy- und VPN-Besonderheiten sind bekannt.
-- Ticket und Freigabeprozess sind vorbereitet.
+- Ticket und Freigabeprozess sind vorbereitet, wenn notwendig.
 
 ### 4. Entscheidung treffen
 
 | Risikobild | Empfohlene Reaktion |
 |---|---|
 | Einzelne Datei, keine Folgeaktivität | Scan und Timeline (Zeitachse)-Prüfung |
-| Unklare Lage, keine aktive Ausbreitung | Investigation Package (Untersuchungspaket) oder AIR |
-| Aktive externe Kommunikation | Isolation ernsthaft prüfen |
+| Unklare Lage, keine aktive Ausbreitung | Investigation Package (Untersuchungspaket) |
+| Aktive externe Kommunikation | Isolation prüfen |
 | Credential Theft/Lateral Movement | Sofortige Security-Eskalation und Isolation |
-| Wahrscheinlicher False Positive | Keine vorschnelle Isolation; Owner einbinden |
+| Wahrscheinlicher False Positive | Keine Remdiation, Ticket kommentieren und schließen |
 
 ### 5. Isolation im Portal nachvollziehen
 
-Nur auf einem freigegebenen Testgerät oder als Demonstration:
+Nur auf einem freigegebenen Testgerät oder als Demonstration(!):
 
 ```text
 Assets (Bestand) -> Devices (Geräte) -> <Gerät> -> Isolate device (Gerät isolieren)
 ```
 
-Vor Bestätigung:
+Vor Bestätigung möglichst:
 
 - Isolationstyp prüfen, falls mehrere Optionen angeboten werden,
 - aussagekräftigen Kommentar eintragen,
@@ -127,6 +127,8 @@ Eine Isolation wird erst aufgehoben, wenn:
 - Security/MSSP die Freigabe erteilt hat,
 - Ticket und Incident aktualisiert sind.
 
+Es gibt selektive Exclusionen, in denen einige Verbindungen, die man selber definieren muss, erhalten bleiben. Sie https://learn.microsoft.com/en-us/defender-endpoint/isolation-exclusions#how-to-use-isolation-exclusion
+
 ## KQL-Ergänzung
 
 Aktive oder kürzlich beobachtete Netzwerkverbindungen eines Geräts:
@@ -159,18 +161,6 @@ DeviceNetworkEvents
 
 ## PowerShell-Ergänzung
 
-Lokalen Schutzstatus prüfen:
-
-```powershell
-Get-MpComputerStatus | Select-Object `
-    AMRunningMode,
-    AntivirusEnabled,
-    RealTimeProtectionEnabled,
-    IsTamperProtected,
-    QuickScanAge,
-    FullScanAge,
-    AntivirusSignatureLastUpdated
-```
 
 Aktuelle TCP-Verbindungen eines Prozesses prüfen:
 
@@ -186,18 +176,6 @@ Get-Process -Name $ProcessName -ErrorAction SilentlyContinue | ForEach-Object {
 ```
 
 > Produktive Änderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.
-
-## Erwartetes Ergebnis
-
-| Feld | Entscheidung |
-|---|---|
-| Gewählte Response Action (Antwortaktion) |  |
-| Sicherheitsbegründung |  |
-| Business Impact (betriebliche Auswirkung) |  |
-| Freigabe |  |
-| Benutzerkommunikation |  |
-| Technische Validierung |  |
-| Bedingung für Aufhebung |  |
 
 ## Diskussionsfragen
 

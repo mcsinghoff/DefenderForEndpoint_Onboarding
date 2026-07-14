@@ -30,17 +30,7 @@ Erlaubt ist die Verwendung nur auf Geräten mit definiertem Admin-Kontext. Auf n
 
 ## Schritt-für-Schritt-Anleitung
 
-### 1. Use Case beschreiben
-
-| Feld | Inhalt |
-|---|---|
-| Risiko | Unautorisierte Remote-Ausführung oder laterale Bewegung |
-| Datenquelle | DeviceProcessEvents |
-| Zielobjekt | Windows-11-Client |
-| Erlaubte Nutzung | Nur freigegebene Admin-Geräte |
-| Erwartete Reaktion | Triage, Benutzer-/Admin-Kontext prüfen, ggf. Isolation |
-
-### 2. Basisquery erstellen
+### 1.Basisquery erstellen
 
 ```kql
 DeviceProcessEvents
@@ -52,7 +42,7 @@ DeviceProcessEvents
           SHA256, ReportId
 ```
 
-### 3. Erlaubte Geräte ausschließen
+### 2. Erlaubte Geräte ausschließen
 
 Für eine Schulungsquery kann eine statische Liste verwendet werden:
 
@@ -73,7 +63,7 @@ DeviceProcessEvents
 
 In Produktion sollte eine wartbare Quelle wie Device (Gerät) Tags (Incidenttags), eine Funktion oder eine kontrollierte Referenzliste bevorzugt werden.
 
-### 4. False Positives (Falsch-positive Ergebnisse) prüfen
+### 3. False Positives (Falsch-positive Ergebnisse) prüfen
 
 Führe die Query (Abfrage) über 30 Tage aus:
 
@@ -103,7 +93,7 @@ Prüfe:
 - bekannte Admin-Nutzung,
 - alternative Dateinamen oder Pfade.
 
-### 5. Detection-Design festlegen
+### 4. Detection-Design festlegen
 
 | Feld | Beispiel |
 |---|---|
@@ -117,7 +107,7 @@ Prüfe:
 | Impacted Entity (betroffene Entität) | DeviceId/DeviceName |
 | Recommended Action (empfohlene Aktion) | Benutzer-/Admin-Kontext prüfen, Timeline (Zeitachse) untersuchen, Scope erweitern |
 
-### 6. Query (Abfrage)-Anforderungen prüfen
+### 5. Query (Abfrage)-Anforderungen prüfen
 
 Die aktuelle Portaloberfläche zeigt bei der Erstellung, welche Spalten für Zeitstempel, Geräte- oder Account (Konto)-Entities (Entitäten) erforderlich sind. Die Query (Abfrage) muss die vom Assistenten verlangten Felder enthalten.
 
@@ -129,7 +119,7 @@ Mindestens sinnvoll:
 - `ReportId`,
 - aussagekräftige Kontextspalten.
 
-### 7. Response Actions (Antwortaktionen) bewusst wählen
+### 6. Response Actions (Antwortaktionen) bewusst wählen
 
 Automatische Response Actions (Antwortaktionen) sollten erst nach ausreichender Pilotierung aktiviert werden.
 
@@ -140,7 +130,7 @@ Automatische Response Actions (Antwortaktionen) sollten erst nach ausreichender 
 | Gerät automatisch isolieren | Nur für sehr eindeutige und hochriskante Use Cases |
 | Datei blockieren/quarantänisieren | Nur bei stabiler Hash-/Dateibewertung |
 
-### 8. Runbook erstellen
+### 7. Wenn vom organisatorischen prozess vorgegeben: Bearbeitungsablauf für den Alert definieren
 
 ```text
 1. Alert (Warnung) übernehmen und Status auf In progress (In Bearbeitung) setzen.
@@ -155,47 +145,11 @@ Automatische Response Actions (Antwortaktionen) sollten erst nach ausreichender 
 
 ## PowerShell-Ergänzung
 
-PsExec oder andere Remote-Tools lokal suchen:
-
-```powershell
-Get-CimInstance Win32_Process |
-    Where-Object { $_.Name -match 'PsExec|PAExec' } |
-    Select-Object ProcessId, ParentProcessId, Name, ExecutablePath, CommandLine
-```
-
-Datei-Hash und Signatur prüfen:
-
-```powershell
-$FilePath = 'C:\Path\To\PsExec.exe'
-Get-FileHash -Path $FilePath -Algorithm SHA256
-Get-AuthenticodeSignature -FilePath $FilePath
-```
-
-> Produktive Änderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.
-
-## Erwartetes Ergebnis
-
-Die Teilnehmer liefern einen Detection-Steckbrief:
-
-| Feld | Ergebnis |
-|---|---|
-| Use Case |  |
-| Query (Abfrage) |  |
-| Zulässige Ausnahmen |  |
-| False-Positive-Analyse |  |
-| Severity (Schweregrad) |  |
-| Frequency (Häufigkeit) |  |
-| Entity Mapping (Entitätszuordnung) |  |
-| Response Action (Antwortaktion) |  |
-| Owner |  |
-| Review-Datum |  |
+< leer, keine pwsh Ergänzung >
 
 ## Diskussionsfragen
 
-- Wann ist eine Custom Detection (benutzerdefinierte Erkennung) besser als eine Intune-Policy?
-- Welche Risiken entstehen bei automatischer Isolation?
-- Wie wird die Approved-Liste gepflegt?
-- Wer reagiert auf den Alert (Warnung): MSSP oder interne IT?
+- Wer reagiert auf welchen Alert (Warnung) der neu erstellt wird: MSSP oder interne IT?
 - Wie wird verhindert, dass eine Detection nach Monaten unbrauchbar wird?
 
 ## Merksatz

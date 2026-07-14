@@ -39,7 +39,7 @@ Erstelle:
 
 ## Schritt-für-Schritt-Anleitung
 
-### 1. Technische Fakten sammeln
+### 1. Technische Fakten gedanklich sammeln
 
 | Feld | Wert |
 |---|---|
@@ -54,7 +54,7 @@ Erstelle:
 | Bereits erfolgte Aktionen |  |
 | Pending Actions (ausstehende Aktionen) |  |
 
-### 2. Business-Kontext ergänzen
+### 2. Business-Kontext gedanklich ergänzen ergänzen
 
 | Frage | Antwort |
 |---|---|
@@ -65,7 +65,7 @@ Erstelle:
 | Welcher Fachbereich muss informiert werden? |  |
 | Bestehen Melde- oder Datenschutzpflichten? |  |
 
-### 3. Verantwortlichkeiten festlegen
+### 3. Verantwortlichkeiten festlegen - Beispielsweise durhc RACI Matrix (Auch diese nur als Beispiel, kann bei jedem Unternehmen anders aussehen)
 
 | Tätigkeit | MSSP/SOC | Interne IT | Fachbereich/Management |
 |---|---|---|---|
@@ -95,7 +95,7 @@ Legende:
 | 3 | Privilegiertes Konto, Credential Theft oder mehrere Geräte | Sofortige Eskalation, Isolation und Identity Response |
 | 4 | Datenabfluss, Ransomware oder kritische Infrastruktur | Krisen-/Major-Incident-Prozess, Management und weitere Stellen |
 
-### 5. MSSP-Übergabe formulieren
+### 5. MSSP-Übergabe: Notwendige Daten isolieren
 
 Beispiel:
 
@@ -112,35 +112,8 @@ Freigaben: <Name/Rolle/Ticket>
 Gewünschte Unterstützung: <konkrete Frage an MSSP>
 ```
 
-### 6. Sentinel-Zielbild einordnen
 
-| Datenquelle | Nutzen im Incident |
-|---|---|
-| Defender XDR | Endpoint-, Identity-, E-Mail- und Cloud-App-Signale |
-| Entra Sign-in Logs | Anmeldeorte, Risiko, MFA und Token-Kontext |
-| Firewall/Proxy | Externe Verbindungen und blockierte Ziele |
-| Azure Activity | Administrative Cloud-Aktionen |
-| Windows Security Events | Zusätzliche Server-/Domain-Controller-Ereignisse |
-| Third-Party Logs | Nicht-Microsoft-Sicherheitsprodukte und Anwendungen |
-
-Sentinel soll den Prozess nicht duplizieren, sondern zusätzliche Daten und Korrelationen in die einheitliche Investigation (Untersuchung) einbringen.
-
-### 7. Abschlusskriterien prüfen
-
-| Kriterium | Erfüllt? | Nachweis |
-|---|---|---|
-| Angriffsscope vollständig bewertet |  |  |
-| Gerät isoliert oder Risiko anderweitig kontrolliert |  |  |
-| Schädliche Artefakte entfernt |  |  |
-| Zugangsdaten/Tokens geprüft oder zurückgesetzt |  |  |
-| Weitere Geräte geprüft |  |  |
-| AIR/Action Center (Aktionscenter) kontrolliert |  |  |
-| Business Owner informiert |  |  |
-| Classification (Klassifizierung) und Determination (Bestimmung) gesetzt |  |  |
-| Root Cause (Grundursache) dokumentiert |  |  |
-| Folgeaufgaben erstellt |  |  |
-
-### 8. Abschlusskommentar erstellen
+### 8. Wenn nötig, in Ticket Abschlusskommentar erstellen
 
 ```text
 Incident als <Classification (Klassifizierung)> / <Determination (Bestimmung)> bewertet.
@@ -155,61 +128,11 @@ Freigabe zum Abschluss durch <Rolle/Name> am <Datum>.
 ```
 
 ## KQL-Ergänzung
-
-Defender-Alerts (Warnungen) eines Benutzers und Geräts suchen:
-
-```kql
-let TargetDevice = "DEVICE-NAME-HERE";
-let TargetUser = "user@contoso.com";
-AlertEvidence
-| where Timestamp > ago(30d)
-| where DeviceName =~ TargetDevice or AccountUpn =~ TargetUser
-| join kind=leftouter (
-    AlertInfo
-    | where Timestamp > ago(30d)
-    | project AlertId, AlertTitle=Title, Severity,
-              ServiceSource, DetectionSource, AlertTime=Timestamp
-) on AlertId
-| project AlertTime, AlertTitle, Severity, ServiceSource,
-          DeviceName, AccountUpn, FileName, SHA256,
-          RemoteIP, RemoteUrl, ProcessCommandLine
-| order by AlertTime desc
-```
-
-Hinweis für die spätere Sentinel-Einführung:
-
-- Defender-XDR-Tabellen und Sentinel-Daten können im einheitlichen Defender Portal gemeinsam für Advanced Hunting (Erweiterte Suche) verfügbar sein.
-- Welche Tabellen vorhanden sind, hängt von angebundenen Datenquellen, Berechtigungen und der Workspace-Konfiguration ab.
+< leer >
 
 ## PowerShell-Ergänzung
 
-Lokalen MDE- und AV-Status als Betriebsnachweis erfassen:
-
-```powershell
-Get-MpComputerStatus | Select-Object `
-    AMRunningMode,
-    AntivirusEnabled,
-    RealTimeProtectionEnabled,
-    AMServiceEnabled,
-    IsTamperProtected,
-    AntivirusSignatureLastUpdated
-
-Get-Service -Name Sense, WinDefend -ErrorAction SilentlyContinue |
-    Select-Object Name, Status, StartType
-```
-
-> Produktive Änderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.
-
-## Erwartetes Ergebnis
-
-Die Teilnehmer liefern eine vollständige Incident-Übergabe mit:
-
-- technischem Scope,
-- Business-Kontext,
-- klarer Rollenverteilung,
-- konkreter Eskalationsfrage,
-- dokumentierten Response Actions (Antwortaktionen),
-- Abschlusskriterien und Folgeaufgaben.
+< leer >
 
 ## Diskussionsfragen
 
