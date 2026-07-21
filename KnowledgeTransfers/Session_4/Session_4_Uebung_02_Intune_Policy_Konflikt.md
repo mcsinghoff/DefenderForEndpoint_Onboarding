@@ -72,7 +72,7 @@ Prüfe insbesondere, ob das betroffene Gerät gleichzeitig mehreren Profilen zug
 
 ### 4. Gruppenrichtlinieneinfluss berücksichtigen
 
-Auf dem Testgerät:
+//**Auf dem Testgerät:**//
 
 ```powershell
 gpresult /h "$env:TEMP\gpresult.html"
@@ -89,34 +89,6 @@ Suche im Bericht nach:
 
 In einer Hybrid-Umgebung kann eine alte GPO weiterhin wirksam sein, obwohl Intune die Zielplattform ist.
 
-### 5. Lokalen Defender-Ist-Zustand prüfen
-
-```powershell
-Get-MpComputerStatus | Select-Object `
-    AMRunningMode,
-    AntivirusEnabled,
-    RealTimeProtectionEnabled,
-    AMServiceEnabled,
-    IsTamperProtected,
-    AntivirusSignatureLastUpdated
-
-Get-MpPreference | Select-Object `
-    DisableRealtimeMonitoring,
-    DisableBehaviorMonitoring,
-    DisableIOAVProtection,
-    DisableScriptScanning,
-    PUAProtection,
-    SignatureFallbackOrder,
-    SignatureUpdateInterval
-```
-
-Achte auf negative Einstellungsnamen:
-
-```text
-DisableRealtimeMonitoring = False
-```
-
-bedeutet, dass Echtzeitüberwachung nicht deaktiviert und damit grundsätzlich aktiviert ist.
 
 ### 6. Defender-Konfigurationsänderungen im Event Log prüfen
 
@@ -172,7 +144,7 @@ Nur die tatsächlich ursächliche Quelle sollte angepasst werden. Typische Ergeb
 - alte GPO nach Change-Prozess bereinigen,
 - falsches Assignment korrigieren,
 - Gerät aus falscher Pilot-/Produktionsgruppe entfernen,
-- Trellix-Restbestand beseitigen,
+- Restbestand von alter Malware Lösung beseitigen,
 - bei veraltetem Reporting auf nächsten Check-in warten.
 
 > Produktive Änderungen erfolgen zentral über Intune beziehungsweise das Defender Portal und nicht lokal per PowerShell.

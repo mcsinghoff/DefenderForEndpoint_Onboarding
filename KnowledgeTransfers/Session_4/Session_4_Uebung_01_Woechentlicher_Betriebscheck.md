@@ -41,37 +41,8 @@ Prüfe, ob das Dashboard auf folgende Bereiche hinweist:
 
 Öffne nur die Bereiche, für die ein Fehler, ein ungewöhnlicher Trend oder eine offene Aufgabe sichtbar ist.
 
-### 2. Relevante Endpoint-Security-Policies kontrollieren
 
-Navigiere nacheinander zu:
-
-```text
-Endpoint security (Endpunktsicherheit)
--> Antivirus (Antivirus)
-
-Endpoint security (Endpunktsicherheit)
--> Endpoint detection and response (Endpunkterkennung und -reaktion)
-
-Endpoint security (Endpunktsicherheit)
--> Attack surface reduction (Verringerung der Angriffsfläche)
-
-Endpoint security (Endpunktsicherheit)
--> Firewall (Firewall)
-```
-
-Öffne die produktiven Windows-11-Policies und prüfe:
-
-- Device status (Gerätestatus)
-- Per-setting status (Status pro Einstellung), sofern verfügbar
-- Error (Fehler)
-- Conflict (Konflikt)
-- Pending (Ausstehend)
-- Last modified (Zuletzt geändert)
-- Assignments (Zuweisungen)
-
-Ein einzelnes Pending-Gerät nach kurzer Offline-Zeit ist anders zu bewerten als viele gleichzeitige Fehler nach einer Policy-Änderung.
-
-### 3. Intune Security Tasks prüfen
+### 2. Intune Security Tasks prüfen
 
 Öffne je nach aktueller Portalnavigation:
 
@@ -91,7 +62,7 @@ Prüfe:
 
 Eine Security Task ist ein Arbeitsauftrag. Sie beweist noch nicht, dass das Risiko bereits behoben wurde.
 
-### 4. Offene Wartungsaktivitäten im Defender Portal prüfen
+### 3. Offene Wartungsaktivitäten im Defender Portal prüfen
 
 Öffne:
 
@@ -150,7 +121,7 @@ Konzentriere dich auf:
 
 ### 7. Betriebscheck abschließen
 
-Der Check ist abgeschlossen, wenn für jede relevante Abweichung ein nächster Schritt existiert:
+Der Check ist abgeschlossen, wenn für jede relevante Abweichung ein nächster Schritt existiert, zum Beispiel:
 
 - technische Analyse durch das Client-Team,
 - App-Owner-Prüfung,

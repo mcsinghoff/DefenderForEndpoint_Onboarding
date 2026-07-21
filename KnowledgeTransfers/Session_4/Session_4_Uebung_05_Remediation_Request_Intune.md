@@ -33,8 +33,6 @@ System (System)
 -> Advanced features (Erweiterte Features)
 ```
 
-Prüfe, ob die Microsoft Intune connection (Microsoft-Intune-Verbindung) aktiviert ist. Ohne diese Verbindung kann keine Intune Security Task erzeugt werden.
-
 ### 2. Sicherheitsempfehlung öffnen
 
 Navigiere zu:
