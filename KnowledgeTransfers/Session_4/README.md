@@ -3,7 +3,6 @@
 
 Dieser Ordner enthält den Erklärungsteil und sieben praxisnahe Übungen für Session 4 des Microsoft-Defender-for-Endpoint-Migrationsprojekts.
 
-
 ## Schwerpunkt der Session
 
 Session 4 behandelt nicht erneut die Incident-Triage, Device Investigation, Automated Investigation & Response, Geräteisolation oder Live Response. Diese Themen wurden bereits in Session 3 behandelt.
