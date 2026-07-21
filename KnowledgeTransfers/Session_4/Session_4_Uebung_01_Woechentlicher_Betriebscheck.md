@@ -69,8 +69,8 @@ Eine Security Task ist ein Arbeitsauftrag. Sie beweist noch nicht, dass das Risi
 ```text
 https://security.microsoft.com
 
-Exposure management (Risikoverwaltung)
--> Vulnerability management (Sicherheitsrisikoverwaltung)
+Exposure management (Gefährdungsverwaltung)
+-> Vulnerability management (Verwaltung von Sicherheitsrisiken)
 -> Remediation (Wartung/Korrektur)
 ```
 
