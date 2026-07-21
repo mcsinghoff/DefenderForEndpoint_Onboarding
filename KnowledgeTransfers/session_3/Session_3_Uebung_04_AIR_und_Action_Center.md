@@ -45,6 +45,9 @@ Wähle eine vorhandene Investigation (Untersuchung) oder Action und beantworte:
 
 ### 1. Action Center (Aktionscenter) prüfen
 
+Das Action Center findet sich unter https://security.microsoft.com/action-center/ oder im Portal unter 
+**Investigation & Response (Untersuchung & Antwort) -> Actions & Submissions (Aktionen & Übermittlungen)**
+
 Prüfe beide Bereiche:
 
 - `Pending (Ausstehend)`
@@ -52,7 +55,7 @@ Prüfe beide Bereiche:
 
 Die AIR-Investigations finden sich auch unter https://security.microsoft.com/airinvestigation
 
-### 5. Automation Level (Automatisierungsebene) diskutieren
+### 2. Automation Level (Automatisierungsebene) diskutieren
 
 Ermittle, ob die betroffenen Geräte einer Device Group (Gerätegruppe) mit Full-, Semi- oder No-Automation (Voll-, Teil- oder keine Automatisierung) zugeordnet sind. [hierzu hilft die Anelitung aus der Microsoft Dokumentation: https://learn.microsoft.com/en-us/defender-endpoint/configure-automated-investigations-remediation?view=o365-worldwide]
 
